@@ -1,220 +1,219 @@
-import Vue from "vue";
-import Router from "vue-router";
-import api from "./../common/js/index";
-Vue.use(Router);
-let rootUrl = sessionStorage.getItem("rooturl");
+import Vue from 'vue'
+import Router from 'vue-router'
+import api from './../common/js/index'
+Vue.use(Router)
+let rootUrl = sessionStorage.getItem('rooturl');
 
 const router = new Router({
-  mode: "history",
+  mode: 'history',
   routes: [
     {
       path: rootUrl,
-      component: resolve => {
-        require(["../components/login/Login"], resolve);
+      component: (resolve) => {
+        require(['../components/login/Login'], resolve)
       }
     },
     {
-      path: rootUrl + "/login",
-      component: resolve => {
-        require(["../components/login/Login"], resolve);
+      path: rootUrl + '/login',
+      component: (resolve) => {
+        require(['../components/login/Login'], resolve)
       }
     },
     {
-      path: rootUrl + "/info",
+      path: rootUrl + '/info',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/info/Info"], resolve);
+      component: (resolve) => {
+        require(['../components/info/Info'], resolve)
       }
     },
     {
-      path: rootUrl + "/telService",
+      path: rootUrl + '/telService',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/info/TelService"], resolve);
+      component: (resolve) => {
+        require(['../components/info/TelService'], resolve)
       }
     },
     {
-      path: rootUrl + "/contactList",
+      path: rootUrl + '/contactList',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/contact/ContactList"], resolve);
+      component: (resolve) => {
+        require(['../components/contact/ContactList'], resolve)
       }
     },
     {
-      path: rootUrl + "/contact",
+      path: rootUrl + '/contact',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/contact/Contact"], resolve);
+      component: (resolve) => {
+        require(['../components/contact/Contact'], resolve)
       }
     },
     {
-      path: rootUrl + "/contactDetail",
+      path: rootUrl + '/contactDetail',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/contact/ContactDetail"], resolve);
+      component: (resolve) => {
+        require(['../components/contact/ContactDetail'], resolve)
       }
     },
     {
-      path: rootUrl + "/evaluate",
+      path: rootUrl + '/evaluate',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/evaluate/Evaluate"], resolve);
+      component: (resolve) => {
+        require(['../components/evaluate/Evaluate'], resolve)
       }
     },
     {
-      path: rootUrl + "/evaluateSub",
+      path: rootUrl + '/evaluateSub',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/evaluate/EvaluateSub"], resolve);
+      component: (resolve) => {
+        require(['../components/evaluate/EvaluateSub'], resolve)
       }
     },
     {
-      path: rootUrl + "/order",
+      path: rootUrl + '/order',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/order/OrderList"], resolve);
+      component: (resolve) => {
+        require(['../components/order/OrderList'], resolve)
       }
     },
     {
-      path: rootUrl + "/orderSearch",
+      path: rootUrl + '/orderSearch',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/order/OrderSearch"], resolve);
+      component: (resolve) => {
+        require(['../components/order/OrderSearch'], resolve)
       }
     },
     {
-      path: rootUrl + "/orderView",
+      path: rootUrl + '/orderView',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/order/OrderView"], resolve);
+      component: (resolve) => {
+        require(['../components/order/OrderView'], resolve)
       }
     },
     {
-      path: rootUrl + "/orderDetail",
+      path: rootUrl + '/orderDetail',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/order/OrderDetail"], resolve);
+      component: (resolve) => {
+        require(['../components/order/OrderDetail'], resolve)
       }
     },
     {
-      path: rootUrl + "/agreement",
+      path: rootUrl + '/agreement',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/agreement/Agreement"], resolve);
+      component: (resolve) => {
+        require(['../components/agreement/Agreement'], resolve)
       }
     },
     {
-      path: rootUrl + "/agreeText",
+      path: rootUrl + '/agreeText',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/agreement/AgreeText"], resolve);
+      component: (resolve) => {
+        require(['../components/agreement/AgreeText'], resolve)
       }
     },
     {
-      path: rootUrl + "/sign",
+      path: rootUrl + '/sign',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/sign/Sign"], resolve);
+      component: (resolve) => {
+        require(['../components/sign/Sign'], resolve)
       }
     },
     {
-      path: rootUrl + "/signSearch",
+      path: rootUrl + '/signSearch',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/sign/SignSearch"], resolve);
+      component: (resolve) => {
+        require(['../components/sign/SignSearch'], resolve)
       }
     },
     {
-      path: rootUrl + "/signDetail",
+      path: rootUrl + '/signDetail',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/sign/SignDetail"], resolve);
+      component: (resolve) => {
+        require(['../components/sign/SignDetail'], resolve)
       }
     },
     {
-      path: rootUrl + "/damageList",
+      path: rootUrl + '/damageList',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/sign/DamageList"], resolve);
+      component: (resolve) => {
+        require(['../components/sign/DamageList'], resolve)
       }
     },
     {
-      path: rootUrl + "/damageCommit",
+      path: rootUrl + '/damageCommit',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/sign/DamageCommit"], resolve);
+      component: (resolve) => {
+        require(['../components/sign/DamageCommit'], resolve)
       }
     },
     {
-      path: rootUrl + "/damageEdit",
+      path: rootUrl + '/damageEdit',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/sign/DamageEdit"], resolve);
+      component: (resolve) => {
+        require(['../components/sign/DamageEdit'], resolve)
       }
     },
     {
-      path: rootUrl + "/help",
+      path: rootUrl + '/help',
       meta: {
         requireAuth: true
       },
-      component: resolve => {
-        require(["../components/help/Help"], resolve);
+      component: (resolve) => {
+        require(['../components/help/Help'], resolve)
       }
     }
   ]
-});
+})
 //  判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(res => res.meta.requireAuth)) {
-    // 判断是否需要登录权限
+  if(to.matched.some(res => res.meta.requireAuth)) { // 判断是否需要登录权限
     var token;
-    api.ssSet("token", "35612692_31ee700ee7274e95be89b51ad554c636");
+    // api.ssSet('token', "35612703_77c0c48d83214f6287af50f54c0ad47f");
     token = api.ssGet("token");
-    if (token != null && token != undefined) {
-      next();
+    if(token != null && token != undefined) {
+      next()
     } else {
       api.getId(to);
     }
   } else {
-    next();
+    next()
   }
-});
-export default router;
+})
+export default router
