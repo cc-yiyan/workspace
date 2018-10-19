@@ -5,35 +5,27 @@
     
     <div class="input-box">
          <div class="input-bar">
-        <!-- <span class="user-icon icon-user"></span> -->
-        <!-- <span class="user-icon icon-user"></span> -->
-        
-        <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
+        <!-- <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/> -->
+            <input placeholder="姓名" />
+          </div>
+       <div class="input-bar">
+        <input placeholder="公司" />
       </div>
        <div class="input-bar">
-        <!-- <span class="user-icon icon-user"></span> -->
-        <input placeholder="公司" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
+        <input placeholder="部门" />
       </div>
        <div class="input-bar">
-        <!-- <span class="user-icon icon-user"></span> -->
-        <input placeholder="部门" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
-      </div>
-       <div class="input-bar">
-        <!-- <span class="user-icon icon-user"></span> -->
-        <input placeholder="邮箱" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
+        <input placeholder="邮箱"/>
       </div>
       <div class="input-bar">
-        <!-- <span class="user-icon icon-user"></span> -->
         <input placeholder="请输入手机号" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
       </div>
       <div class="input-bar">
-        <!-- <span class="user-icon icon-password"></span> -->
         <input placeholder="请输入验证码" type="tel" maxlength="6" @keyup="Keyup" v-model.trim="code"/>
-        <!--<div :class="[flag?'code-bg':'']" class="login-code" @click="getCode"><span>{{str}}</span></div>-->
         <div class="login-code" @click="getCode"><span>{{str}}</span></div>
       </div>
     </div>
-    <div :class="[state?'code-bg':'']" class="login-button" @click="userLogin">下一步</div>
+    <div :class="[state?'code-bg':'']" class="login-button" @click="userphoto">下一步</div>
   </div>
 </template>
 
@@ -111,7 +103,8 @@ export default {
         );
       }
     },
-    userLogin() {
+    // 下一步上传照片
+    userphoto() {
       this.$router.push({
         path: rootUrl + "/upPhoto"
       });
@@ -124,68 +117,36 @@ export default {
   width: 100%;
   height: 100%;
   background: url("../../assets/img/login_bg.png") no-repeat center;
-  /* background: #999; */
   background-size: cover;
   position: relative;
 }
 
 .login-logo {
-  /* width: 2.2rem; */
-  font-size: 0.5rem;
-  height: auto;
+  text-align: center;
   margin: 0 auto;
   padding-top: 2rem;
   padding-bottom: 1rem;
 }
 
-.login-logo > img {
-  width: 100%;
-}
-
 .input-box {
   width: 70%;
   height: auto;
-  padding: 0.2em 0;
   background: #fff;
-  margin: 1em auto 0;
+  margin: 1em auto 1rem;
   position: relative;
   border-radius: 0.45em;
   -webkit-border-radius: 0.45em;
   overflow: hidden;
-  /*line-height: 3em;*/
 }
 
 .input-bar {
   font-size: 0.28rem;
-  height: 1.9em;
-  padding: 0.8em 0;
+  /* height: 1.9em; */
+  padding: 0.8em 0rem;
   line-height: 1.9em;
-  padding-left: 4em;
+  padding-left: 1em;
   position: relative;
   overflow: hidden;
-}
-
-/* .input-bar:first-child {
-  border-bottom: 1px solid #c1c1c1;
-} */
-
-.user-icon {
-  width: 3em;
-  height: 1.5em;
-  border-right: 1px solid #c1c1c1;
-  position: absolute;
-  top: 1em;
-  left: 0;
-}
-
-.icon-user {
-  background: url("./../../assets/img/icon_user.png") no-repeat center;
-  background-size: 1.4em;
-}
-
-.icon-password {
-  background: url("./../../assets/img/icon_password.png") no-repeat center;
-  background-size: 1.5em;
 }
 
 .input-bar > input {
@@ -194,7 +155,6 @@ export default {
   line-height: inherit;
   color: #999;
 }
-
 .login-code {
   position: absolute;
   top: 0.8em;
@@ -202,7 +162,6 @@ export default {
   width: 6.5em;
   height: 100%;
   line-height: inherit;
-  /*background: #ccc;*/
   color: #ff4d51;
   border: none;
   text-align: center;
