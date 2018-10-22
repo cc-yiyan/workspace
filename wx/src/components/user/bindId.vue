@@ -6,19 +6,19 @@
     <div class="input-box">
          <div class="input-bar">
         <!-- <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/> -->
-            <input placeholder="姓名" />
+            <input placeholder="姓名" v-model="loginName"/>
           </div>
        <div class="input-bar">
-        <input placeholder="公司" />
+        <input placeholder="公司" v-model="company"/>
       </div>
        <div class="input-bar">
-        <input placeholder="部门" />
+        <input placeholder="部门" v-model="department"/>
       </div>
        <div class="input-bar">
-        <input placeholder="邮箱"/>
+        <input placeholder="邮箱" v-model="mailbox"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入手机号" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
+        <input placeholder="请输入手机号" v-model.trim="phone" @keyup="Keyup" type="tel" maxlength="11"/>
       </div>
       <div class="input-bar">
         <input placeholder="请输入验证码" type="tel" maxlength="6" @keyup="Keyup" v-model.trim="code"/>
@@ -42,6 +42,11 @@ export default {
       codeNum: false,
       str: "验证码",
       num: "",
+      loginName: "zuosi", //用户名
+      company: "", //公司
+      department: "", //部门
+      mailbox: "", //邮箱
+      phone: "", //验证码
       viewH: ""
     };
   },
@@ -105,8 +110,15 @@ export default {
     },
     // 下一步上传照片
     userphoto() {
+      const self = this;
       this.$router.push({
-        path: rootUrl + "/upPhoto"
+        path: rootUrl + "/upPhoto",
+        query: {
+          loginName: this.loginName,
+          company: this.company,
+          department: this.department,
+          mailbox: this.mailbox
+        }
       });
     }
   }
