@@ -30,13 +30,13 @@
 </template>
 
 <script>
-let rootUrl = sessionStorage.getItem("rooturl");
+// let rootUrl = sessionStorage.getItem("rooturl");
 export default {
   data() {
     return {
       telephone: "", //手机号
       codes: "", //验证码
-      code: "",//验证码发送成功的返回值
+      code: "", //验证码发送成功的返回值
       flag: false,
       state: false, //是否注册
 
@@ -113,7 +113,7 @@ export default {
     // userphoto() {
     //   const self = this;
     //   this.$router.push({
-       
+
     //     path: rootUrl + "/upPhoto",
     //     query: {
     //       loginName: this.loginName,
@@ -123,28 +123,32 @@ export default {
     //     }
     //   });
     // }
-//验证码校验
-    codeCheck(){
+    //验证码校验
+    codeCheck() {
       const self = this;
-       var p = {
-          smsId:self.smsId,
-          smsCode:self.smsCode,
-        };
-        self.$api.post('register/codeSMSValid',p , success => {
-         self.code = success.repData.code;
-        }, e => {
+      var p = {
+        smsId: self.smsId,
+        smsCode: self.smsCode
+      };
+      self.$api.post(
+        "register/codeSMSValid",
+        p,
+        success => {
+          self.code = success.repData.code;
+        },
+        e => {
           this.$message({
             message: e.repData.repMsg,
-            type: 'error'
+            type: "error"
           });
-        }),
-        userphoto()
+        }
+      ),
+        userphoto();
     },
     //点击下一步用户头像上传
     userphoto() {
       const self = this;
       this.$router.push({
-       
         path: rootUrl + "/upPhoto",
         query: {
           loginName: this.loginName,
