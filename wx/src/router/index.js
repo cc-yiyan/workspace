@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import api from "./../common/js/index";
 Vue.use(Router);
+// let rootUrl = sessionStorage.getItem("rooturl");
 let rootUrl = sessionStorage.getItem("rooturl");
 
 const router = new Router({
@@ -202,7 +203,7 @@ const router = new Router({
     // 个人中心
     // 绑定身份信息页面
     {
-      path: rootUrl + "/bindId",
+      path: "/bindId",
       meta: {
         requireAuth: true
       },
@@ -212,7 +213,7 @@ const router = new Router({
     },
     // 个人中心（信息列表页面）
     {
-      path: rootUrl + "/getUserList",
+      path: "/getUserList",
       meta: {
         requireAuth: true
       },
@@ -222,7 +223,7 @@ const router = new Router({
     },
     // 上传工牌头像页面
     {
-      path: rootUrl + "/upPhoto",
+      path: "/upPhoto",
       meta: {
         requireAuth: true
       },
@@ -232,7 +233,7 @@ const router = new Router({
     },
     // 分享二维码页面
     {
-      path: rootUrl + "/share",
+      path: "/share",
       meta: {
         requireAuth: true
       },
