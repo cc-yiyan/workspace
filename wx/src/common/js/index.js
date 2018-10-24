@@ -1,88 +1,92 @@
-import { md5 } from 'vux'
+import { md5 } from "vux";
 // 配置开发服务器
 
-var root = 'http://crmtest.ajhroro.com/v2api';
-
-var rooturl = '/v2wx';
-sessionStorage.setItem('rooturl', rooturl);
+// var root = "http://crmtest.ajhroro.com/v2api";
+// var rooturl = "/v2wx";
+var root = "http://10.0.6.163";
+var rooturl = "/v2wx";
+sessionStorage.setItem("rooturl", rooturl);
 // 引用axios
-var axios = require('axios');
+var axios = require("axios");
 // 返回在vue模板中的调用接口
 export default {
-  get: function (url, params, success, failure) {
-    return this.apiAxios('GET', url, params, success, failure)
+  get: function(url, params, success, failure) {
+    return this.apiAxios("GET", url, params, success, failure);
   },
-  post: function (url, params, success, failure) {
-    return this.apiAxios('POST', url, params, success, failure)
+  post: function(url, params, success, failure) {
+    return this.apiAxios("POST", url, params, success, failure);
   },
-  put: function (url, params, success, failure) {
-    return this.apiAxios('PUT', url, params, success, failure)
+  put: function(url, params, success, failure) {
+    return this.apiAxios("PUT", url, params, success, failure);
   },
-  delete: function (url, params, success, failure) {
-    return this.apiAxios('DELETE', url, params, success, failure)
+  delete: function(url, params, success, failure) {
+    return this.apiAxios("DELETE", url, params, success, failure);
   },
-  lsSet: function (k, v) {
+  lsSet: function(k, v) {
     localStorage.setItem(k, v);
   },
-  lsGet: function (k) {
+  lsGet: function(k) {
     return localStorage.getItem(k);
   },
-  ssSet: function (k, v) {
+  ssSet: function(k, v) {
     try {
       sessionStorage.setItem(k, JSON.stringify(v));
-    } catch (e) {
-    }
+    } catch (e) {}
   },
-  ssGet: function (k) {
+  ssGet: function(k) {
     try {
       var v = sessionStorage.getItem(k);
       return v == null ? null : JSON.parse(v);
-    } catch (e) {
-    }
+    } catch (e) {}
   },
   getId(to) {
     var self = this;
-    var code = this.getQueryString('code');
+    var code = this.getQueryString("code");
     if (code) {
       // 有 code  自动登录
-      self.get('crm/login/withWechart?code=' + code, null, r => {
-        var hrefUrl = encodeURI(window.location.href);
-        var url2 = hrefUrl.split(rooturl)[0];
-        var loginCode = r.repData.loginCode;
-        if(loginCode == '0000'){
-          var wxUser = {
-            loginCode: r.repData.loginCode,
-            redisKey: r.repData.redisKey
+      self.get(
+        "crm/login/withWechart?code=" + code,
+        null,
+        r => {
+          var hrefUrl = encodeURI(window.location.href);
+          var url2 = hrefUrl.split(rooturl)[0];
+          var loginCode = r.repData.loginCode;
+          if (loginCode == "0000") {
+            var wxUser = {
+              loginCode: r.repData.loginCode,
+              redisKey: r.repData.redisKey
+            };
+            this.ssSet("wxUser", wxUser);
+            window.location.href = url2 + rooturl + "/login";
+          } else if (loginCode == "0001") {
+            var wxUser = {
+              loginCode: r.repData.loginCode,
+              redisKey: r.repData.redisKey
+            };
+            this.ssSet("wxUser", wxUser);
+            window.location.href = url2 + rooturl + "/login";
+          } else if (loginCode == "0002") {
+            var token = r.repData.token;
+            self.ssSet("token", token);
+            window.location.href = url2 + to.matched[0].path;
+          } else {
           }
-          this.ssSet('wxUser', wxUser);
-          window.location.href = url2 + rooturl +'/login';
+        },
+        e => {
+          console.log(e);
+          return;
         }
-        else if(loginCode == '0001'){
-          var wxUser = {
-            loginCode: r.repData.loginCode,
-            redisKey: r.repData.redisKey
-          }
-          this.ssSet('wxUser', wxUser);
-          window.location.href = url2 + rooturl +'/login';
-        }
-        else if(loginCode == '0002'){
-          var token = r.repData.token;
-          self.ssSet('token', token);
-          window.location.href = url2 + to.matched[0].path;
-        }
-        else{
-        }
-      }, e => {
-        console.log(e);
-        return
-      })
+      );
       // common.getWxUserInfo();
     } else {
       //无code
       //没有微信用户信息，没有授权-->> 需要授权，跳转授权页面 -->> 自动授权跳转登录
       let url = encodeURI(window.location.href);
       // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa9bf0219adac8929&redirect_uri=' + url + '&response_type=code&scope=snsapi_base&state=1#wechat_redirect';
-      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx56fc0754157234a7&redirect_uri=' + url + '&response_type=code&scope=snsapi_base&state=1#wechat_redirect';
+      window.location.href =
+        "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx56fc0754157234a7&redirect_uri=" +
+        url +
+        "&response_type=code&scope=snsapi_base&state=1#wechat_redirect";
     }
   },
   getQueryString(name) {
@@ -93,10 +97,10 @@ export default {
   },
   /* token校验，加密校验 */
   sign(p) {
-    let token = this.ssGet('token');
+    let token = this.ssGet("token");
     let time = new Date().getTime();
     if (token == undefined || token == null) {
-      token = '';
+      token = "";
     }
     var arr = [];
     for (var item in p) {
@@ -104,17 +108,16 @@ export default {
     }
     var paramsObj = {};
     var operate = {
-      operateCode: '',
-      operateName: '',
+      operateCode: "",
+      operateName: ""
     };
     for (var i = 0; i < arr.length; i++) {
       var key = arr[i];
       var value = p[key];
-      if(key == 'operateCode' || key == 'operateName'){
-        operate.operateCode = p['operateCode'];
-        operate.operateName = p['operateName'];
-      }
-      else{
+      if (key == "operateCode" || key == "operateName") {
+        operate.operateCode = p["operateCode"];
+        operate.operateName = p["operateName"];
+      } else {
         paramsObj[key] = value;
       }
     }
@@ -149,8 +152,8 @@ export default {
       time: time,
       reqData: paramsObj,
       front: true,
-      sign: md5(str).toUpperCase(),
-    }
+      sign: md5(str).toUpperCase()
+    };
     return signData;
   },
 
@@ -171,26 +174,26 @@ export default {
     axios({
       method: method,
       url: url,
-      data: method === 'POST' || method === 'PUT' ? params : null,
-      params: method === 'GET' || method === 'DELETE' ? params : null,
+      data: method === "POST" || method === "PUT" ? params : null,
+      params: method === "GET" || method === "DELETE" ? params : null,
       baseURL: root,
       withCredentials: false,
-      timeout: 100000,
+      timeout: 100000
       // headers: {
       //   'X-Requested-With': 'XMLHttpRequest',
       //   'Content-Type': 'application/json; charset=UTF-8'
       // }
     })
-      .then(function (res) {
+      .then(function(res) {
         if (res.data.success === true) {
           if (success) {
-            success(res.data)
+            success(res.data);
           }
         } else {
           if (failure) {
-            failure(res.data)
+            failure(res.data);
           } else {
-            window.alert('error: ' + JSON.stringify(res.data))
+            window.alert("error: " + JSON.stringify(res.data));
           }
         }
 
@@ -208,23 +211,23 @@ export default {
         //   }
         // }
         // else if (res.data.repCode === '0104') {
-          // alert('0104');
-          // var hrefUrl = window.location.href;
-          // console.log(hrefUrl);
-          // var url = hrefUrl.split('/wx')[1];
-          // console.log(url);
-          // var to = url.split('?')[0];
-          // self.ssSet('token', '')
-          // self.getId(to);
-          // window.alert('登录过期');
+        // alert('0104');
+        // var hrefUrl = window.location.href;
+        // console.log(hrefUrl);
+        // var url = hrefUrl.split('/wx')[1];
+        // console.log(url);
+        // var to = url.split('?')[0];
+        // self.ssSet('token', '')
+        // self.getId(to);
+        // window.alert('登录过期');
         // }
         // else {
         //   window.alert(JSON.stringify(res.data.repMsg));
         // }
       })
-      .catch(function (err) {
-        console.log(err)
-        window.alert('服务器异常');
-      })
+      .catch(function(err) {
+        console.log(err);
+        window.alert("服务器异常");
+      });
   }
-}
+};
