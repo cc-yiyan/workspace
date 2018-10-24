@@ -18,14 +18,14 @@
         <input placeholder="邮箱" v-model="mailbox"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入手机号" v-model.trim="phone" @keyup="Keyup" type="tel" maxlength="11"/>
+        <input placeholder="请输入手机号" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入验证码" type="tel" maxlength="6" @keyup="Keyup" v-model.trim="code"/>
+        <input placeholder="请输入验证码" type="tel" maxlength="6" @keyup="Keyup" v-model.trim="codes"/>
         <div class="login-code" @click="getCode"><span>{{str}}</span></div>
       </div>
     </div>
-    <div :class="[state?'code-bg':'']" class="login-button" @click="userphoto">下一步</div>
+    <div :class="[state?'code-bg':'']" class="login-button" @click="codeCheck">下一步</div>
   </div>
 </template>
 
@@ -34,19 +34,20 @@ let rootUrl = sessionStorage.getItem("rooturl");
 export default {
   data() {
     return {
-      telephone: "",
-      code: "",
-      codeKey: "",
+      telephone: "", //手机号
+      codes: "", //验证码
+      code: "",//验证码发送成功的返回值
       flag: false,
-      state: false,
+      state: false, //是否注册
+
       codeNum: false,
       str: "验证码",
       num: "",
-      loginName: "zuosi", //用户名
+      loginName: "", //用户名
       company: "", //公司
       department: "", //部门
       mailbox: "", //邮箱
-      phone: "", //验证码
+
       viewH: ""
     };
   },
@@ -58,7 +59,7 @@ export default {
       this.telephone.length > 10 && !this.codeNum
         ? (this.flag = true)
         : (this.flag = false);
-      this.telephone.length > 10 && this.code.length > 5
+      this.telephone.length > 10 && this.codes.length > 5
         ? (this.state = true)
         : (this.state = false);
     },
@@ -97,10 +98,10 @@ export default {
           telephone: self.telephone
         };
         self.$api.post(
-          "crm/login/sendMessage",
+          "register/sendCodeSMS",
           p,
           r => {
-            self.codeKey = r.repData.codeKey;
+            self.code = r.repData.code;
           },
           e => {
             console.log(e);
@@ -109,9 +110,41 @@ export default {
       }
     },
     // 下一步上传照片
+    // userphoto() {
+    //   const self = this;
+    //   this.$router.push({
+       
+    //     path: rootUrl + "/upPhoto",
+    //     query: {
+    //       loginName: this.loginName,
+    //       company: this.company,
+    //       department: this.department,
+    //       mailbox: this.mailbox
+    //     }
+    //   });
+    // }
+//验证码校验
+    codeCheck(){
+      const self = this;
+       var p = {
+          smsId:self.smsId,
+          smsCode:self.smsCode,
+        };
+        self.$api.post('register/codeSMSValid',p , success => {
+         self.code = success.repData.code;
+        }, e => {
+          this.$message({
+            message: e.repData.repMsg,
+            type: 'error'
+          });
+        }),
+        userphoto()
+    },
+    //点击下一步用户头像上传
     userphoto() {
       const self = this;
       this.$router.push({
+       
         path: rootUrl + "/upPhoto",
         query: {
           loginName: this.loginName,
