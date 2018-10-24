@@ -3,15 +3,20 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-var root = "http://10.0.6.163";
+var root = "http://f64e9eee.ngrok.io";
 var rooturl = "/v2wx";
 sessionStorage.setItem("rooturl", rooturl);
 // 引用axios
 var axios = require("axios");
+
+    // axios.config.headers['Content-Type'] = 'application/x-www-form-urlencoded';  
+    // //判断是否存在ticket，即判断用户是否登录，如果存在的话，则每个http header都加上ticket
+
+
 // 返回在vue模板中的调用接口
 export default {
   get: function(url, params, success, failure) {
-    return this.apiAxios("GET", url, params, success, failure);
+    return this.apiAxios("GET", url, params, success, failure,);
   },
   post: function(url, params, success, failure) {
     return this.apiAxios("POST", url, params, success, failure);
@@ -178,6 +183,9 @@ export default {
       params: method === "GET" || method === "DELETE" ? params : null,
       baseURL: root,
       withCredentials: false,
+      header:{
+          'Content-Type': 'application/x-www-form-urlencoded'
+      },
       timeout: 100000
       // headers: {
       //   'X-Requested-With': 'XMLHttpRequest',

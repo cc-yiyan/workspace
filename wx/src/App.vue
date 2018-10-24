@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app-box">
     <router-view></router-view>
     <!--<router-view v-wechat-title='$route.meta.title'></router-view>-->
   </div>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app-box'
 }
 </script>
 <style lang="less">

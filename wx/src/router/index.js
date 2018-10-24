@@ -3,15 +3,14 @@ import Router from "vue-router";
 import api from "./../common/js/index";
 Vue.use(Router);
 // let rootUrl = sessionStorage.getItem("rooturl");
-let rootUrl = sessionStorage.getItem("rooturl");
-
+let rootUrl = "";
 const router = new Router({
-  mode: "history",
+  mode: "hash",
   routes: [
     {
-      path: rootUrl,
+      path: "/",
       component: resolve => {
-        require(["../components/login/Login"], resolve);
+        require(["../components/user/BindId"], resolve);
       }
     },
     {

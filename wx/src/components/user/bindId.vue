@@ -52,6 +52,18 @@ export default {
     };
   },
   mounted() {
+    let self=this
+    let p={}
+    self.$api.get(
+          "/api/wechat/oauth2?state=test&scope=base&callback=http://f64e9eee.ngrok.io/api/wechat/getActQRCode?channel=test",
+          
+          r => {
+            console.log(r)
+          },
+          e => {
+            console.log(e);
+          }
+        );
     this.viewH = window.innerHeight;
   },
   methods: {

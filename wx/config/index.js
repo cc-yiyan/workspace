@@ -59,8 +59,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, "../dist"),
     // 微信开发服务器
-    assetsSubDirectory: "./v2wx/static",
-    assetsPublicPath: "/v2wx/",
+    assetsSubDirectory: "./static",
+    assetsPublicPath: "",
     // 微信UAT服务器
     // assetsSubDirectory: './wxuat/static',
     // assetsPublicPath: '/wxuat/',
