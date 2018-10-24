@@ -47,7 +47,7 @@ export default {
       iconV2: require("../../assets/img/icon-v2@2x.png"),
       iconV3: require("../../assets/img/icon-v3@2x.png"),
       imgLocalIds: "",
-      viewH: ""//动态获取视窗
+      viewH: "" //动态获取视窗
     };
   },
   mounted() {
@@ -74,9 +74,7 @@ export default {
     );
   },
   methods: {
-    loadData() {
-      
-    },
+    loadData() {},
     //图片选择
     imgUp() {
       let self = this;
@@ -179,25 +177,7 @@ export default {
       );
     }
   },
-  created() {
-    //获取是否签署协议
-    let self = this;
-    var id = self.$api.ssGet("token");
-    id = id.substring(0, id.indexOf("_"));
-    self.$api.post(
-      "crm/customer/getByPrimaryKey",
-      {
-        id: id
-      },
-      r => {
-        self.isAccept = r.repData.isAccept ? r.repData.isAccept : 0;
-      },
-      e => {
-        console.log(e);
-      }
-    );
-    this.loadData();
-  }
+  created() {}
 };
 </script>
 <style scoped>
