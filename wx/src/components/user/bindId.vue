@@ -54,16 +54,39 @@ export default {
     };
   },
   mounted() {
-    let self=this
-    let p={}
+    let self=this;
+    let p = {};
     //
-    var getQueryString = function(name) {
+    /*var getQueryString = function(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if(r != null) return unescape(r[2]);
       return null;
-    };
-    var code = getQueryString('code');
+    };*/
+    var getQueryString = function(paras){
+      var url= window.location.href;
+      var index=url.indexOf("?");
+      var str=url.substr(index+1);
+      var arr=str.split("&");
+      var obj={};
+      for (var i = 0; i < arr.length; i++) {
+        var num=arr[i].indexOf("=");
+        if (num>0) {
+          obj[arr[i].substring(0,num)]=arr[i].substr(num+1);
+          // name=arr[i].substring(0,num);
+          // value=arr[i].substr(num+1);
+          // this[name]=value;
+        }
+      }
+      console.log(obj)
+      var returnValue = obj[paras];
+      return returnValue;
+    }
+    //var code = getQueryString('code');
+    self.openId = getQueryString("openId");
+    console.log("openid="+self.openId);
+    console.log(window.location.href);
+    /*console.log("code:"+code);
     if(code) {
       self.$api.get("/api/wechat/callback",
         {
@@ -71,14 +94,6 @@ export default {
         },
         function(d) {
           console.log("callback:"+d)
-          /*self.$api.get("/api/wechat/getActQRCode?channel=test",
-            r => {
-              console.log(r)
-            },
-            e => {
-              console.log(e);
-            }
-          );*/
         },
         function(data) {
           alert('网络错误');
@@ -86,7 +101,7 @@ export default {
       );
     } else {
       alert('请从微信公众号打开');
-    }
+    }*/
 
     this.viewH = window.innerHeight;
   },
@@ -209,8 +224,8 @@ export default {
           self.userphoto();
         },
         e => {
-          this.$message({
-            message: e.repData.repMsg,
+          self.$message({
+            message: e.msg,
             type: "error"
           });
         }
