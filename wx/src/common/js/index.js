@@ -3,20 +3,19 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-var root = "http://f64e9eee.ngrok.io";
+var root = "http://6043b172.ngrok.io";
 var rooturl = "/v2wx";
 sessionStorage.setItem("rooturl", rooturl);
 // 引用axios
 var axios = require("axios");
 
-    // axios.config.headers['Content-Type'] = 'application/x-www-form-urlencoded';  
-    // //判断是否存在ticket，即判断用户是否登录，如果存在的话，则每个http header都加上ticket
-
+// axios.config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+// //判断是否存在ticket，即判断用户是否登录，如果存在的话，则每个http header都加上ticket
 
 // 返回在vue模板中的调用接口
 export default {
   get: function(url, params, success, failure) {
-    return this.apiAxios("GET", url, params, success, failure,);
+    return this.apiAxios("GET", url, params, success, failure);
   },
   post: function(url, params, success, failure) {
     return this.apiAxios("POST", url, params, success, failure);
@@ -149,16 +148,17 @@ export default {
       content += key + value;
     }
     var str = content.replace(/time/, ',"front":truetime');
-    var signData = {
-      form: 1,
-      operateCode: operate.operateCode,
-      operateName: operate.operateName,
-      token: token,
-      time: time,
-      reqData: paramsObj,
-      front: true,
-      sign: md5(str).toUpperCase()
-    };
+    // var signData = {
+    //   form: 1,
+    //   operateCode: operate.operateCode,
+    //   operateName: operate.operateName,
+    //   token: token,
+    //   time: time,
+    //   reqData: paramsObj,
+    //   front: true,
+    //   sign: md5(str).toUpperCase()
+    // };
+    var signData = paramsObj;
     return signData;
   },
 
@@ -183,8 +183,8 @@ export default {
       params: method === "GET" || method === "DELETE" ? params : null,
       baseURL: root,
       withCredentials: false,
-      header:{
-          'Content-Type': 'application/x-www-form-urlencoded'
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       timeout: 100000
       // headers: {
