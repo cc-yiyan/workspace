@@ -3,13 +3,15 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-var root = "http://f64e9eee.ngrok.io";
+var root = "http://747f513e.ngrok.io";
+var wxEnv = "test";
+
 var rooturl = "/v2wx";
 sessionStorage.setItem("rooturl", rooturl);
 // 引用axios
 var axios = require("axios");
 
-    // axios.config.headers['Content-Type'] = 'application/x-www-form-urlencoded';  
+    // axios.config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     // //判断是否存在ticket，即判断用户是否登录，如果存在的话，则每个http header都加上ticket
 
 
@@ -174,7 +176,7 @@ export default {
   apiAxios(method, url, params, success, failure) {
     let self = this;
     if (params) {
-      params = self.sign(params);
+      //params = self.sign(params);
     }
     axios({
       method: method,

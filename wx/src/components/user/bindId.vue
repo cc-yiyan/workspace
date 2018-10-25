@@ -2,7 +2,7 @@
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}">
     <!-- <div class="login-logo"><img src="../../assets/img/icon_login_logo.png"></div> -->
     <div class="login-logo"><span>绑定身份信息</span></div>
-    
+
     <div class="input-box">
          <div class="input-bar">
         <!-- <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/> -->
@@ -31,11 +31,13 @@
 
 <script>
 // let rootUrl = sessionStorage.getItem("rooturl");
+import api from '../../common/js/index'
 export default {
   data() {
     return {
       telephone: "", //手机号
       codes: "", //验证码
+      smsId:"",
       code: "", //验证码发送成功的返回值
       flag: false,
       state: false, //是否注册
@@ -47,23 +49,45 @@ export default {
       company: "", //公司
       department: "", //部门
       mailbox: "", //邮箱
-
+      openId:"",
       viewH: ""
     };
   },
   mounted() {
     let self=this
     let p={}
-    self.$api.get(
-          "/api/wechat/oauth2?state=test&scope=base&callback=http://f64e9eee.ngrok.io/api/wechat/getActQRCode?channel=test",
-          
-          r => {
-            console.log(r)
-          },
-          e => {
-            console.log(e);
-          }
-        );
+    //
+    var getQueryString = function(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if(r != null) return unescape(r[2]);
+      return null;
+    };
+    var code = getQueryString('code');
+    if(code) {
+      self.$api.get("/api/wechat/callback",
+        {
+          code: code,state:api.wxEnv
+        },
+        function(d) {
+          console.log("callback:"+d)
+          /*self.$api.get("/api/wechat/getActQRCode?channel=test",
+            r => {
+              console.log(r)
+            },
+            e => {
+              console.log(e);
+            }
+          );*/
+        },
+        function(data) {
+          alert('网络错误');
+        }
+      );
+    } else {
+      alert('请从微信公众号打开');
+    }
+
     this.viewH = window.innerHeight;
   },
   methods: {
@@ -107,13 +131,14 @@ export default {
           }
         }, 1000);
         var p = {
-          telephone: self.telephone
+          phone: self.telephone
         };
         self.$api.post(
-          "register/sendCodeSMS",
-          p,
+          "register/sendCodeSMS", p,
           r => {
-            self.code = r.repData.code;
+            console.log(r.data.msg_id);
+            //alert(JSON.stringify(r.data.msg_id));
+            self.smsId = r.data.msg_id;
           },
           e => {
             console.log(e);
@@ -140,13 +165,23 @@ export default {
       const self = this;
       var p = {
         smsId: self.smsId,
-        smsCode: self.smsCode
+        smsCode: self.codes
       };
       self.$api.post(
         "register/codeSMSValid",
         p,
         success => {
-          self.code = success.repData.code;
+          //self.code = success.repData.code;
+          //alert(JSON.stringify(success));
+          //验证成功
+          if(success.data.is_valid){
+            self.saveUserInfo();
+          }else{
+            this.$message({
+              message: "验证码输入错误！",
+              type: "error"
+            });
+          }
         },
         e => {
           this.$message({
@@ -154,14 +189,39 @@ export default {
             type: "error"
           });
         }
-      ),
-        userphoto();
+      )
+        //userphoto();
     },
+
+    saveUserInfo(){
+      let self = this;
+      let p = {
+        loginName: this.loginName,
+        company: this.company,
+        department: this.department,
+        mailbox: this.mailbox,
+        phone:this.telephone,
+        openid:this.openId,
+        fromOpenid:''
+      }
+      self.$api.post("register/saveUserInfo", p,
+        success => {
+          self.userphoto();
+        },
+        e => {
+          this.$message({
+            message: e.repData.repMsg,
+            type: "error"
+          });
+        }
+      )
+    },
+
     //点击下一步用户头像上传
     userphoto() {
       const self = this;
       this.$router.push({
-        path: rootUrl + "/upPhoto",
+        path: /*self.$api.rooturl + */"/upPhoto",
         query: {
           loginName: this.loginName,
           company: this.company,
