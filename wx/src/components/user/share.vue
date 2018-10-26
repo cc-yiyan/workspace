@@ -101,7 +101,7 @@
 .img-bg{
     width: 7.5rem;
     height:14rem;
-    background: url("./../../assets/img/imgBgShare.png") no-repeat;
+    background: url("./../../assets/img/imgBgShare.jpg") no-repeat;
     background-size: 100%;
     position: relative;
 }
