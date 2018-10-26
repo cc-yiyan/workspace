@@ -3,7 +3,8 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-var root = "http://6043b172.ngrok.io";
+var root = "http://747f513e.ngrok.io";
+// var root = "";
 var rooturl = "/v2wx";
 sessionStorage.setItem("rooturl", rooturl);
 // 引用axios
@@ -77,7 +78,6 @@ export default {
           }
         },
         e => {
-          console.log(e);
           return;
         }
       );
@@ -183,25 +183,22 @@ export default {
       params: method === "GET" || method === "DELETE" ? params : null,
       baseURL: root,
       withCredentials: false,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      timeout: 100000
-      // headers: {
-      //   'X-Requested-With': 'XMLHttpRequest',
-      //   'Content-Type': 'application/json; charset=UTF-8'
-      // }
+      
+      timeout: 100000,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
     })
       .then(function(res) {
+        
         if (res.data.success === true) {
-          if (success) {
             success(res.data);
-          }
         } else {
           if (failure) {
             failure(res.data);
           } else {
-            window.alert("error: " + JSON.stringify(res.data));
+            // window.alert("error: " + JSON.stringify(res.data));
           }
         }
 
@@ -234,7 +231,7 @@ export default {
         // }
       })
       .catch(function(err) {
-        console.log(err);
+        // console.log(err);
         window.alert("服务器异常");
       });
   }

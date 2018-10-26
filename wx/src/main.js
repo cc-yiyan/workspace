@@ -8,8 +8,9 @@ import api from './common/js/index'
 Vue.prototype.$api = api
 // 引用路由
 import router from './router/index'
-import { ToastPlugin,ConfirmPlugin,AlertPlugin} from 'vux'
+import { ToastPlugin,ConfirmPlugin,AlertPlugin,WechatPlugin} from 'vux'
 
+Vue.use(WechatPlugin)//使用微信插件
 Vue.use(ToastPlugin)
 Vue.use(ConfirmPlugin)
 Vue.use(AlertPlugin)
