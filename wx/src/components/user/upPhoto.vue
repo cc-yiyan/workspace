@@ -73,19 +73,34 @@
         this.imgDisplay = true
       },
       submitForm(event) {
-        let self = this
+        let self = this;
         event.preventDefault();
+        var getQueryString = function(paras){
+          var url= window.location.href;
+          var index=url.indexOf("?");
+          var str=url.substr(index+1);
+          var arr=str.split("&");
+          var obj={};
+          for (var i = 0; i < arr.length; i++) {
+            var num=arr[i].indexOf("=");
+            if (num>0) {
+              obj[arr[i].substring(0,num)]=arr[i].substr(num+1);
+            }
+          }
+          console.log(obj)
+          var returnValue = obj[paras];
+          return returnValue;
+        }
+        let userId = getQueryString("userId");
         let formData = new FormData();
         formData.append('file', self.file);
-        formData.append('userId', '123123')
+        formData.append('userId', userId);
         let p = formData
 
         self.$api.postFile(
           "/register/uploadimage",
           p,
           r => {
-
-
             self.$router.push({
               path: '/getUserList'
             })
@@ -95,13 +110,7 @@
           },
           'file'
         );
-
       },
-
-
-
-
-
     },
     created() {}
   };
@@ -175,7 +184,7 @@
   }
 
   .hide {
-    
+
     visibility: hidden;
   }
   .imgsort{
