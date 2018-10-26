@@ -4,12 +4,13 @@
       <div class="info-bg"><img src="../../assets/img/info.png"/></div>
       <div class="info-user">
         <div class="user-img">
-          <img class="headPortrait"
-            :src="info.wechatImageUrl?info.wechatImageUrl:wechatImageUrl"
-            @click="imgUp"/>
-          <img v-show="info.accountGrade=='V1'" class="headGrade" :src="iconV1"/>
-          <img v-show="info.accountGrade=='V2'" class="headGrade" :src="iconV2"/>
-          <img v-show="info.accountGrade=='V3'" class="headGrade" :src="iconV3"/>
+          <form action="/register/uploadimage" enctype="multipart/form-data" id="ff" method="post">
+            <input type="file" name="file" id="file"/>
+            <input type="text" name="userId" value="123344">
+             <img class="headPortrait"
+            @click="submit"/>
+          </form>
+          
         </div>
     <div class="bottom" @click="submit">完成绑定</div>
         
@@ -56,38 +57,42 @@ export default {
 
     let hrefUrl = window.location.href;
     // 获取微信相关信息
-    self.$api.post(
-      "crm/wechart/getSign",
-      { url: hrefUrl },
-      r => {
-        self.imgToken = r.repData.token;
-        Vue.wechat.config({
-          //debug: true,
-          appId: r.repData.appId.toString(), // 必填，公众号的唯一标识
-          timestamp: r.repData.timeStamp.toString(), // 必填，生成签名的时间戳
-          nonceStr: r.repData.nonceStr.toString(), // 必填，生成签名的随机串
-          signature: r.repData.sign.toString(), //必填，签名
-          jsApiList: ["chooseImage", "uploadImage", "previewImage"]
-        });
-      },
-      e => {}
-    );
+    // self.$api.post(
+    //   "crm/wechart/getSign",
+    //   { url: hrefUrl },
+    //   r => {
+    //     self.imgToken = r.repData.token;
+    //     Vue.wechat.config({
+    //       //debug: true,
+    //       appId: r.repData.appId.toString(), // 必填，公众号的唯一标识
+    //       timestamp: r.repData.timeStamp.toString(), // 必填，生成签名的时间戳
+    //       nonceStr: r.repData.nonceStr.toString(), // 必填，生成签名的随机串
+    //       signature: r.repData.sign.toString(), //必填，签名
+    //       jsApiList: ["chooseImage", "uploadImage", "previewImage"]
+    //     });
+    //   },
+    //   e => {}
+    // );
   },
   methods: {
     loadData() {},
     //图片选择
     imgUp() {
       let self = this;
-      Vue.wechat.chooseImage({
-        //debug: true,
-        count: 1,
-        sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
-        //   sourceType: ['album', 'camera'],
-        success: function(res) {
-          self.imgLocalIds = res.localIds[0];
-          self.uploadImg();
-        }
-      });
+      console.log(12231)
+      // Vue.wechat.chooseImage({
+      //   //debug: true,
+      //   count: 1,
+      //   sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
+      //   //   sourceType: ['album', 'camera'],
+      //   success: function(res) {
+      //     self.imgLocalIds = res.localIds[0];
+      //     self.uploadImg();
+      //   }
+      // });
+    },
+    submit(){
+      
     },
     // 图片上传微信服务器
     uploadImg() {

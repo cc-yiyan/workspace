@@ -25,7 +25,7 @@
         <div class="login-code" @click="getCode"><span>{{str}}</span></div>
       </div>
     </div>
-    <div :class="[state?'code-bg':'']" class="login-button" @click="codeCheck">下一步</div>
+    <div :class="[state?'code-bg':'']" class="login-button" @click="codeCheck">绑定</div>
   </div>
 </template>
 
@@ -177,14 +177,14 @@ export default {
           if(success.data.is_valid){
             self.saveUserInfo();
           }else{
-            this.$message({
+            self.$message({
               message: "验证码输入错误！",
               type: "error"
             });
           }
         },
         e => {
-          this.$message({
+          self.$message({
             message: e.repData.repMsg,
             type: "error"
           });
@@ -209,7 +209,7 @@ export default {
           self.userphoto();
         },
         e => {
-          this.$message({
+          self.$message({
             message: e.repData.repMsg,
             type: "error"
           });
@@ -220,8 +220,8 @@ export default {
     //点击下一步用户头像上传
     userphoto() {
       const self = this;
-      this.$router.push({
-        path: /*self.$api.rooturl + */"/upPhoto",
+      self.$router.push({
+        path: "/upPhoto",
         query: {
           loginName: this.loginName,
           company: this.company,
