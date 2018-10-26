@@ -41,10 +41,11 @@
       //var code = getQueryString('code');
       self.openId = getQueryString("openId");
       console.log("openid="+self.openId);
-      console.log(window.location.href);
+      console.log("url="+window.location.href);
+      console.log("##="+ location.href.split('#')[0])
       self.fromOpenId = getQueryString("fromOpenId");
 
-      self.$api.get("/api/weixin/sign?url=" + rootUrl, p,
+      self.$api.get("/api/weixin/sign?url=" + encodeURIComponent(location.href.split('#')[0]), p,
         r => {
           wx.config({
             debug: true,
@@ -76,11 +77,11 @@
     },
     methods: {
       recordVisit(){
-          let t = this;
+          let self = this;
           //if(self.fromOpenId!=null&&self.fromOpenId!=undefined){
           let p = {
-            openId:t.openId,
-            fromOpenId:t.fromOpenId,
+            openId:self.openId,
+            fromOpenId:self.fromOpenId,
             url:window.location.href
           }
           self.$api.get("/share/trace", p,
