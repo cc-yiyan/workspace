@@ -187,7 +187,7 @@ export default {
     }
     
     let headerStr=""
-    headerStr=(fileHeader=="")?"application/x-www-form-urlencoded":"multipart/form-data"
+    headerStr=(fileHeader=="")?"application/json;charset=UTF-8":"multipart/form-data"
     axios({
       method: method,
       url: url,
