@@ -5,7 +5,7 @@
       <div class="info-user">
         <div class="user-img">
 
-          <input type="file" @change="getFile($event)" class="file-input" value="">
+          <input type="file" accept="image/jpeg,image/jpg,image/x-png,image/x-gif,image/webp" @change="getFile($event)" class="file-input" value="">
           <div class="u-btn">点击上传</div>
           <img :src="sortUrl" id="img0" width="120" >
           <!-- <button @click="submitForm($event)">提交</button> -->
