@@ -5,16 +5,16 @@
       <div class="info-user">
         <div class="user-img">
 
+          <input type="file" @change="getFile($event)" class="file-input" value="">
+          <div class="u-btn">点击上传</div>
+          <img :src="sortUrl" id="img0" width="120" >
+          <!-- <button @click="submitForm($event)">提交</button> -->
 
         </div>
+        <div v-if="imgDisplay" class="bottom" @click="submitForm($event)">完成绑定</div>
 
-        <form>
 
-          <input type="file" @change="getFile($event)">
-          <button @click="submitForm($event)">提交</button>
-        </form>
-
-        <!-- <div class="bottom" @click="upFile">完成绑定</div> -->
+        <!-- -->
 
       </div>
 
@@ -42,6 +42,8 @@
     data() {
       return {
         file: '',
+        sortUrl: '',
+        imgDisplay: false
 
       };
     },
@@ -52,112 +54,54 @@
 
     },
     methods: {
-
+      getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+          url = window.createObjectURL(file);
+        } else if (window.URL != undefined) {
+          // mozilla(firefox)
+          url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) {
+          // webkit or chrome
+          url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+      },
       getFile(event) {
         this.file = event.target.files[0];
+        this.sortUrl = this.getObjectURL(this.file)
+        this.imgDisplay = true
       },
       submitForm(event) {
-        let self=this
+        let self = this
         event.preventDefault();
         let formData = new FormData();
         formData.append('file', self.file);
-        formData.append('userId','123123')
-       let p=formData
-       
-      self.$api.postFile(
+        formData.append('userId', '123123')
+        let p = formData
+
+        self.$api.postFile(
           "/register/uploadimage",
           p,
           r => {
+
+
+            self.$router.push({
+              path: '/getUserList'
+            })
           },
           e => {
-            self.$message({
-              message: e.repData.repMsg,
-              type: "error"
-            });
+            console.log(e.msg)
           },
           'file'
         );
-        
+
       },
 
 
 
-      // 上传图片服务器，回显http地址
-      toUpLoad(serverId) {
-        let self = this;
-        let p = {
-          operateCode: "144",
-          operateName: "/个人中心/上传头像",
-          mediaId: serverId,
-          accessToken: self.imgToken
-        };
-        self.$api.post(
-          "file/ProfilePhotoUploadController/wechatUpload",
-          p,
-          r => {},
-          e => {
-            if (e == "" || e == null) {
-              self.$vux.toast.show({
-                text: "上传失败，请重试!",
-                time: "2000",
-                type: "text",
-                position: "middle"
-              });
-            } else {
-              self.saveHeadPhoto(e);
-              console.log(e);
-            }
-          }
-        );
-      },
-      //微信头像 上传后，保存接口
-      saveHeadPhoto(url) {
-        let self = this;
-        let p = {
-          appOrWechat: "1",
-          wechatImageUrl: url
-        };
-        self.$api.post(
-          "crm/appimages/saveProfileImages",
-          p,
-          r => {
-            self.loadData();
-            self.$vux.toast.show({
-              text: "头像修改成功!",
-              time: "2000",
-              type: "text",
-              position: "middle"
-            });
-          },
-          e => {}
-        );
-      },
-      //完成绑定的提交按钮
-      subminContact() {
-        let self = this;
 
-        let p = {
-          loginName: this.$route.query.loginName,
-          company: this.$route.query.company,
-          department: this.$route.query.department,
-          mailbox: this.$route.query.mailbox,
-          // imgUrl:[...(self.contact.httpPicture)]
-          imgUrl: self.contact.httpPicture.toString()
-        };
-        self.$api.post(
-          "register/saveUserInfo",
-          p,
-          r => {
-            this.$router.push(rootUrl + "/getUserList");
-          },
-          e => {
-            this.$message({
-              message: e.repData.repMsg,
-              type: "error"
-            });
-          }
-        );
-      }
+
     },
     created() {}
   };
@@ -180,11 +124,11 @@
   }
 
   .user-img {
-    width: 3.5em;
-    height: 3.5em;
     border-radius: 100%;
     overflow: hidden;
     margin: 0 auto;
+    background: url('');
+    text-align: center
   }
 
   .headGrade {
@@ -216,6 +160,31 @@
     border-radius: 0.5em;
     text-align: center;
     color: #fff;
-    background: #ccc;
+    background:#da3f51;
+    position: relative;
+    top: 3rem;
+  }
+
+  .file-input {
+    height: 3.5em;
+    position: relative;
+    left: .6rem;
+    ;
+    top: .5rem;
+    opacity: 0;
+  }
+
+  .hide {
+    
+    visibility: hidden;
+  }
+  .imgsort{
+    width: 3.5em;
+    height: 3.5em;
+    visibility: visible;
+  }
+  .u-btn{
+    color: #fff;
+    margin-bottom: .9rem;
   }
 </style>
