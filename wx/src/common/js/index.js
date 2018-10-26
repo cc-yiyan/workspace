@@ -22,6 +22,9 @@ export default {
   post: function(url, params, success, failure) {
     return this.apiAxios("POST", url, params, success, failure);
   },
+  postFile: function(url, params, success, failure,header) {
+    return this.apiAxios("POST", url, params, success, failure,header);
+  },
   put: function(url, params, success, failure) {
     return this.apiAxios("PUT", url, params, success, failure);
   },
@@ -172,11 +175,19 @@ export default {
     主要是，不同的接口的成功标识和失败提示是不一致的。
     另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
   */
-  apiAxios(method, url, params, success, failure) {
+  apiAxios(method, url, params, success, failure,header) {
     let self = this;
     if (params) {
+      
       //params = self.sign(params);
     }
+    let fileHeader=""
+    if(header){
+      fileHeader="file"
+    }
+    
+    let headerStr=""
+    headerStr=(fileHeader=="")?"application/x-www-form-urlencoded":"multipart/form-data"
     axios({
       method: method,
       url: url,
@@ -184,8 +195,8 @@ export default {
       params: method === "GET" || method === "DELETE" ? params : null,
       baseURL: root,
       withCredentials: false,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+      headers: {
+        "Content-Type": headerStr
       },
       timeout: 100000
       // headers: {
