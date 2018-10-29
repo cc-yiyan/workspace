@@ -20,8 +20,8 @@
       };
     },
     mounted() {
-      let self = this
-      let p = {}
+      let self = this;
+      let p = {};
       var getQueryString = function(paras){
         var url= window.location.href;
         var index=url.indexOf("?");
@@ -66,8 +66,8 @@
             let shareData = {
               title: '安吉信息安全冲顶大会', // 分享标题
               desc: '每天10题，赢8000元大奖，关注公众号还有丰厚礼品等你拿！', // 分享描述
-              link: rootUrl+'/index.html#/share?fromOpenId='+self.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: rootUrl+'./../../assets/img/share-tip.png', // 分享图标
+              link: 'http://'+rootUrl+'/index.html#/share?fromOpenId='+self.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: 'http://'+rootUrl+'/assets/img/share-tip.png', // 分享图标
             }
             /*wx.updateAppMessageShareData(shareData, function (res) {
               //这里是回调函数
@@ -86,8 +86,17 @@
 
         }
       );
-      this.recordVisit();
+      //this.recordVisit();
       this.viewH = window.innerHeight;
+      var uv = getQueryString("uvFlag");
+      self.$api.get("/share/uv?openId"+self.openId, {},
+        r => {
+          console.log("record-uv-ok:"+p.url+","+p.openId+","+p.fromOpenId);
+        },
+        e => {
+
+        }
+      );
     },
     methods: {
       recordVisit(){
