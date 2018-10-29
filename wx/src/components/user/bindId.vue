@@ -219,8 +219,9 @@ export default {
       self.$api.post(
         "register/saveUserInfo",
         p,
-        success => {
-          self.userphoto();
+        s => {
+          console.log("uid="+s.data.id);
+          self.userphoto(s.data.id);
         },
         e => {
           self.$message({
@@ -232,12 +233,12 @@ export default {
     },
 
     //点击下一步用户头像上传
-    userphoto() {
+    userphoto(id) {
       const self = this;
       this.$router.push({
-        path: /*self.$api.rooturl + */ "/upPhoto",
+        path: /*self.$api.rooturl + */ "/upPhoto?userId="+id,
         query: {
-          loginName: this.loginName,
+          userId: id,
           company: this.company,
           department: this.department,
           mailbox: this.mailbox

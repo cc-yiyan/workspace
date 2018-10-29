@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="bottom" @click="close">返回</div>
-    
+
   </div>
 </template>
 
@@ -61,8 +61,25 @@ export default {
   methods: {
     loadData() {
       let self = this;
+      var getQueryString = function(paras) {
+        var url = window.location.href;
+        var index = url.indexOf("?");
+        var str = url.substr(index + 1);
+        var arr = str.split("&");
+        var obj = {};
+        for (var i = 0; i < arr.length; i++) {
+          var num = arr[i].indexOf("=");
+          if (num > 0) {
+            obj[arr[i].substring(0, num)] = arr[i].substr(num + 1);
+          }
+        }
+        console.log(obj);
+        var returnValue = obj[paras];
+        return returnValue;
+      };
+      let userId = getQueryString("userId");
       self.$api.post(
-        "register/queryUserInfo?userId=15",
+        "register/queryUserInfo?userId="+userId,
         {},
         r => {
           console.log(r, 111);
