@@ -12,7 +12,7 @@ module.exports = {
     //配置跨域请求
     proxyTable: {
       "/api": {
-        target: "http://10.0.6.163/api", //通过本地服务器讲请求转发到这个目标接口域名
+        target: "http://10.0.6.163/", //通过本地服务器讲请求转发到这个目标接口域名
         changeOrigin: true //设置这个参数进行跨域
       }
     },
