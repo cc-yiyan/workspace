@@ -3,7 +3,7 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-var root = "http://9a3f1950.ngrok.io";
+var root = "http://srcwap.anji-plus.com/api";
 var wxEnv = "test";
 
 var rooturl = "/v2wx";
