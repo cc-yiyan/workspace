@@ -10,7 +10,7 @@ const router = new Router({
     {
       path: "/",
       component: resolve => {
-        require(["../components/user/BindId"], resolve);
+        require(["../components/user/bindId"], resolve);
       }
     },
     {
@@ -207,7 +207,7 @@ const router = new Router({
         requireAuth: true
       },
       component: resolve => {
-        require(["../components/user/BindId"], resolve);
+        require(["../components/user/bindId"], resolve);
       }
     },
     // 个人中心（信息列表页面）
