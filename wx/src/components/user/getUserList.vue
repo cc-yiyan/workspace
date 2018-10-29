@@ -2,7 +2,7 @@
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}" >
     <div class="head">
       <img :src="item.headimgurl" class="user-img">
-        <span>{{item.nickName}}</span>
+        <div style="color:#ccc">{{item.nickName}}</div>
     </div>
     <div class="middle" >
        <div class="input-bar">
@@ -147,7 +147,7 @@ export default {
   /* text-align: center; */
   margin: 0 auto;
   margin-left: 3rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   /* padding-bottom: 1rem; */
 }
 
@@ -177,6 +177,7 @@ export default {
 .input-bar {
   font-size: 0.28rem;
   /* height: 1.9em; */
+  color: #999;
   padding: 0.8em 0rem;
   line-height: 1.9em;
   padding-left: 1em;
