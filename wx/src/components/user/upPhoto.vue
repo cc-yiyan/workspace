@@ -28,7 +28,6 @@
   import {
     WechatPlugin
   } from "vux";
-  import $ from 'jquery'
   Vue.use(WechatPlugin); //使用微信插件
   let rootUrl = sessionStorage.getItem("rooturl");
   import {
