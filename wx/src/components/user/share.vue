@@ -88,13 +88,14 @@
       );
       //this.recordVisit();
       this.viewH = window.innerHeight;
-      var uv = getQueryString("uvFlag");
-      self.$api.get("/share/uv?openId"+self.openId, {},
+      //var uv = getQueryString("uvFlag");
+      console.log("uv-visit:"+self.openId);
+      self.$api.get("/share/uv?openId="+self.openId, {},
         r => {
           console.log("record-uv-ok:"+p.url+","+p.openId+","+p.fromOpenId);
         },
         e => {
-
+          console.log("uv-visit-error:",e);
         }
       );
     },
