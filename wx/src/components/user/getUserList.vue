@@ -27,7 +27,7 @@
         积分:{{item.score}}
       </div>
       <div class="input-bar">
-        绑定状态:{{item.auditState}}
+        绑定状态:{{state}}
       </div>
     </div>
     <div class="bottom" @click="close">返回</div>
@@ -83,6 +83,13 @@ export default {
           // if (r.repData.imgUrl != "") {
           //   self.contact.httpPicture = r.repData.imgUrl.split(",");
           // }
+          if (r.data.state == 3) {
+            self.state = "已绑定";
+          } else if (r.data.state == 2) {
+            self.state = "审核中";
+          } else {
+            self.state = "未绑定";
+          }
         },
         e => {
           // if (e.repCode == "0104") {
@@ -100,8 +107,12 @@ export default {
       );
     },
     close() {
-      WeixinJSBridge.call("closeWindow");
+      const self = this;
+      // WeixinJSBridge.call("closeWindow");
       // this.$route.go(-1);
+      self.$router.push({
+        path: "/"
+      });
     }
   }
 };
