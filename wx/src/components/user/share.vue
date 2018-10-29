@@ -40,10 +40,12 @@
       }
       //var code = getQueryString('code');
       self.openId = getQueryString("openId");
-      console.log("openid="+self.openId);
+
       console.log("url="+window.location.href);
-      console.log("##="+ location.href.split('#')[0])
+      console.log("sign-url="+ location.href.split('#')[0])
       self.fromOpenId = getQueryString("fromOpenId");
+      console.log("openId="+self.openId);
+      console.log("fromOpenId="+self.fromOpenId);
 
       self.$api.get("/api/weixin/sign?url=" + encodeURIComponent(location.href.split('#')[0]), p,
         r => {
@@ -54,19 +56,30 @@
             nonceStr: r.data.nonceStr, // 必填，生成签名的随机串
             signature: r.data.signature, //必填，签名
             jsApiList: [
-              'updateAppMessageShareData'
+              'onMenuShareAppMessage', //1.0 分享到朋友
+              'onMenuShareTimeline', //1.0分享到朋友圈
+              'updateAppMessageShareData', //1.4 分享到朋友
+              'updateTimelineShareData', //1.4分享到朋友圈
             ]
           });
           wx.ready(function () {
-            let share = {
+            let shareData = {
               title: '安吉信息安全冲顶大会', // 分享标题
               desc: '每天10题，赢8000元大奖，关注公众号还有丰厚礼品等你拿！', // 分享描述
               link: rootUrl+'/index.html#/share?fromOpenId='+self.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: rootUrl+'/assets/img/share-tip.png', // 分享图标
+              imgUrl: rootUrl+'./../../assets/img/share-tip.png', // 分享图标
             }
-            wx.updateAppMessageShareData(share, function (res) {
+            /*wx.updateAppMessageShareData(shareData, function (res) {
               //这里是回调函数
-            });
+            });*/
+            if(wx.onMenuShareAppMessage){ //微信文档中提到这两个接口即将弃用，故判断
+              wx.onMenuShareAppMessage(shareData);//1.0 分享到朋友
+              wx.onMenuShareTimeline(shareData);//1.0分享到朋友圈
+            }else if(wx.updateAppMessageShareData){
+              wx.updateAppMessageShareData(shareData);//1.4 分享到朋友
+              wx.updateTimelineShareData(shareData);//1.4分享到朋友圈
+            }
+            //https://blog.csdn.net/qq_36584352/article/details/82665893
           })
         },
         e => {
@@ -87,7 +100,7 @@
           }
           self.$api.post("/share/trace", p,
             r => {
-              console.log("record-view-ok:"+p.url);
+              console.log("record-view-ok:"+p.url+","+p.openId+","+p.fromOpenId);
             },
             e => {
 
