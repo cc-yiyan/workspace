@@ -85,7 +85,7 @@
             fromOpenId:self.fromOpenId,
             url:window.location.href
           }
-          self.$api.get("/share/trace", p,
+          self.$api.post("/share/trace", p,
             r => {
               console.log("record-view-ok:"+p.url);
             },
