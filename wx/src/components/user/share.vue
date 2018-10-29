@@ -84,6 +84,7 @@
         },
         e => {
 
+
         }
       );
       //this.recordVisit();
