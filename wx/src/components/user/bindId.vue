@@ -1,6 +1,6 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}">
-    <div class="login-logo"><span>绑定身份信息</span></div>
+    <div class="login-logo"><span style="color:#fff">绑定身份信息</span></div>
     <div class="input-box">
       <div class="input-bar">
         <!-- <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/> -->
