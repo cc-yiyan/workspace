@@ -4,22 +4,22 @@
     <div class="input-box">
       <div class="input-bar">
         <!-- <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/> -->
-        <input placeholder="姓名" v-model="loginName"/>
+        <input placeholder="请输入姓名" v-model="loginName" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="公司" v-model="company"/>
+        <input placeholder="请输入公司" v-model="company" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="部门" v-model="department"/>
+        <input placeholder="请输入部门" v-model="department" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="邮箱" v-model="mailbox"/>
+        <input placeholder="请输入邮箱" v-model="mailbox" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入手机号" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/>
+        <input placeholder="请输入手机号" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入验证码" type="tel" maxlength="6" @keyup="Keyup" v-model.trim="codes"/>
+        <input placeholder="请输入验证码" type="tel" maxlength="6" @keyup="Keyup" v-model.trim="codes" class="inputt"/>
         <div class="login-code" @click="getCode"><span>{{str}}</span></div>
       </div>
     </div>
@@ -219,9 +219,8 @@ export default {
       self.$api.post(
         "register/saveUserInfo",
         p,
-        s => {
-          console.log("uid="+s.data.id);
-          self.userphoto(s.data.id);
+        success => {
+          self.userphoto();
         },
         e => {
           self.$message({
@@ -233,12 +232,12 @@ export default {
     },
 
     //点击下一步用户头像上传
-    userphoto(id) {
+    userphoto() {
       const self = this;
       this.$router.push({
-        path: /*self.$api.rooturl + */ "/upPhoto?userId="+id,
+        path: /*self.$api.rooturl + */ "/upPhoto",
         query: {
-          userId: id,
+          loginName: this.loginName,
           company: this.company,
           department: this.department,
           mailbox: this.mailbox
@@ -270,6 +269,8 @@ export default {
   background: #fff;
   margin: 1em auto 1rem;
   position: relative;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
   border-radius: 0.45em;
   -webkit-border-radius: 0.45em;
   overflow: hidden;
@@ -278,6 +279,10 @@ export default {
 .input-bar {
   font-size: 0.28rem;
   /* height: 1.9em; */
+  background: #ccc;
+  opacity: 1;
+  border-bottom: 1px #ccc solid;
+  background: #fff;
   padding: 0.8em 0rem;
   line-height: 1.9em;
   padding-left: 1em;
@@ -289,7 +294,10 @@ export default {
   width: 100%;
   height: 100%;
   line-height: inherit;
-  color: #999;
+}
+.inputt {
+  background: #fff;
+  opacity: 1;
 }
 .login-code {
   position: absolute;
