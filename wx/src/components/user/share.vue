@@ -92,7 +92,8 @@
       },
 
       recordVisit(){
-        var uv = getQueryString("uvFlag");
+        let self = this;
+        var uv = self.getQueryString("uvFlag");
         console.log("uv="+uv);
         //if(!"1"==""+uv || uv==undefined) {
           console.log("uv-visit:" + self.openId);
