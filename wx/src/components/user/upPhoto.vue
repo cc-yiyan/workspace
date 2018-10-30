@@ -95,7 +95,7 @@ export default {
         p,
         r => {
           self.$router.push({
-            path: "/getUserList"
+            path: "/getUserList?userId="+userId
           });
         },
         e => {
