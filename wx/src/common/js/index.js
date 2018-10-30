@@ -3,9 +3,8 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-// var root = "http://srcwap.anji-plus.com/api";
 var root = "/";
-var wxEnv = "test";
+//var wxEnv = "test";
 
 var rooturl = "/v2wx";
 sessionStorage.setItem("rooturl", rooturl);
@@ -188,7 +187,11 @@ export default {
     }
 
     let headerStr=""
-    headerStr=(fileHeader=="")?"application/json;charset=UTF-8":"multipart/form-data"
+    headerStr=(fileHeader=="")?"application/json;charset=UTF-8":"multipart/form-data";
+    let head = {};
+    if(fileHeader=="file"){
+      head = {'Content-Type':"multipart/form-data"}
+    }
     axios({
       method: method,
       url: url,
@@ -196,9 +199,7 @@ export default {
       params: method === "GET" || method === "DELETE" ? params : null,
       baseURL: root,
       withCredentials: false,
-      headers: {
-        "Content-Type": headerStr
-      },
+      headers: head,
       timeout: 100000
       // headers: {
       //   'X-Requested-With': 'XMLHttpRequest',

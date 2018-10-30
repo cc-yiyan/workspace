@@ -22,35 +22,20 @@
     mounted() {
       let self = this;
       let p = {};
-      var getQueryString = function(paras){
-        var url= window.location.href;
-        var index=url.indexOf("?");
-        var str=url.substr(index+1);
-        var arr=str.split("&");
-        var obj={};
-        for (var i = 0; i < arr.length; i++) {
-          var num=arr[i].indexOf("=");
-          if (num>0) {
-            obj[arr[i].substring(0,num)]=arr[i].substr(num+1);
-          }
-        }
-        console.log(obj)
-        var returnValue = obj[paras];
-        return returnValue;
-      }
-      //var code = getQueryString('code');
-      self.openId = getQueryString("openId");
 
+      //var code = getQueryString('code');
+      self.openId = self.getQueryString("openId");
       console.log("url="+window.location.href);
       console.log("sign-url="+ location.href.split('#')[0])
-      self.fromOpenId = getQueryString("fromOpenId");
+      self.fromOpenId = self.getQueryString("fromOpenId");
       console.log("openId="+self.openId);
       console.log("fromOpenId="+self.fromOpenId);
+      this.recordVisit();
 
       self.$api.get("/api/weixin/sign?url=" + encodeURIComponent(location.href.split('#')[0]), p,
         r => {
           wx.config({
-            debug: true,
+            debug: false,
             appId: r.data.appId, // 必填，公众号的唯一标识
             timestamp: r.data.timestamp, // 必填，生成签名的时间戳
             nonceStr: r.data.nonceStr, // 必填，生成签名的随机串
@@ -84,37 +69,45 @@
         },
         e => {
 
-
         }
       );
-      //this.recordVisit();
       this.viewH = window.innerHeight;
-      //var uv = getQueryString("uvFlag");
-      console.log("uv-visit:"+self.openId);
-      self.$api.get("/share/uv?openId="+self.openId, {},
-        r => {
-          console.log("record-uv-ok:"+p.url+","+p.openId+","+p.fromOpenId);
-        },
-        e => {
-          console.log("uv-visit-error:",e);
-        }
-      );
     },
     methods: {
-      recordVisit(){
-          let self = this;
-          //if(self.fromOpenId!=null&&self.fromOpenId!=undefined){
-          let p = {
-            openId:self.openId,
-            fromOpenId:self.fromOpenId,
-            url:window.location.href
+      getQueryString(paras){
+        var url= window.location.href;
+        var index=url.indexOf("?");
+        var str=url.substr(index+1);
+        var arr=str.split("&");
+        var obj={};
+        for (var i = 0; i < arr.length; i++) {
+          var num=arr[i].indexOf("=");
+          if (num>0) {
+            obj[arr[i].substring(0,num)]=arr[i].substr(num+1);
           }
-          self.$api.post("/share/trace", p,
+        }
+        console.log(obj)
+        var returnValue = obj[paras];
+        return returnValue;
+      },
+
+      recordVisit(){
+        var uv = getQueryString("uvFlag");
+        console.log("uv="+uv);
+        //if(!"1"==""+uv || uv==undefined) {
+          console.log("uv-visit:" + self.openId);
+          self.$api.get("/share/uv?openId=" + self.openId, {},
             r => {
-              console.log("record-view-ok:"+p.url+","+p.openId+","+p.fromOpenId);
+              if(r.data!=null) {
+                //console.log("record-uv-ok:" + p.url + "," + p.openId + "," + p.fromOpenId);
+                console.log("redirect-url:" + r.data);
+                window.location.href = r.data;
+              }else {
+                console.log("visit-url-yourself");
+              }
             },
             e => {
-
+              console.log("uv-visit-error:", e);
             }
           );
         //}
