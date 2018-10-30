@@ -137,5 +137,7 @@
     background-color: #000;
     bottom: .2rem;
     right: .2rem;
+    background-image: url("./../../assets/img/er.jpg");
+    background-size: 100%;
 }
 </style>
