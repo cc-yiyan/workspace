@@ -3,7 +3,8 @@ import { md5 } from "vux";
 
 // var root = "http://crmtest.ajhroro.com/v2api";
 // var rooturl = "/v2wx";
-var root = "http://srcwap.anji-plus.com/api";
+// var root = "http://srcwap.anji-plus.com/api";
+var root = "/";
 var wxEnv = "test";
 
 var rooturl = "/v2wx";
@@ -178,14 +179,14 @@ export default {
   apiAxios(method, url, params, success, failure,header) {
     let self = this;
     if (params) {
-      
+
       //params = self.sign(params);
     }
     let fileHeader=""
     if(header){
       fileHeader="file"
     }
-    
+
     let headerStr=""
     headerStr=(fileHeader=="")?"application/json;charset=UTF-8":"multipart/form-data"
     axios({
