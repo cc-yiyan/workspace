@@ -1,17 +1,17 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}" >
     <!-- <div class="info-header"> -->
-      <!-- <div class="info-bg"><img src="../../assets/img/info.png" /></div> -->
+      <div class="info-bg"><img src="../../assets/img/login_bg.png" /></div>
       <div class="info-user">
         <div class="user-img">
 
           <input type="file" accept="image/jpeg,image/jpg,image/x-png,image/x-gif,image/webp" @change="getFile($event)" class="file-input" value="">
-          <div class="u-btn">点击上传</div>
+          <div class="u-btn">点击上传图片</div>
           <img :src="sortUrl" id="img0" width="120" class="bobo">
           <!-- <button @click="submitForm($event)">提交</button> -->
 
         </div>
-        <div v-if="imgDisplay" class="bottom" @click="submitForm($event)">完成绑定</div>
+        <div  v-if="imgDisplay" class="bottom" @click="submitForm($event)">完成绑定</div>
 
 
         <!-- -->
@@ -38,7 +38,7 @@ export default {
     return {
       file: "",
       sortUrl: "",
-      imgDisplay: false
+      imgDisplay: false,
     };
   },
   mounted() {
@@ -95,7 +95,7 @@ export default {
         p,
         r => {
           self.$router.push({
-            path: "/getUserList?userId="+userId
+            path: "/getUserList"
           });
         },
         e => {
@@ -169,8 +169,8 @@ export default {
   border-radius: 0.5em;
   text-align: center;
   color: #fff;
-  /* background: #da3f51; */
-  background: #ccc;
+  background: #da3f51;
+  /* background: #ccc; */
   position: relative;
   top: 3rem;
 }
@@ -197,5 +197,8 @@ export default {
 }
 .bobo {
   border-radius: 50%;
+}
+.code-bg {
+  background: #ff4d51;
 }
 </style>
