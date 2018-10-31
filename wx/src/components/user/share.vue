@@ -30,7 +30,7 @@
       self.fromOpenId = self.getQueryString("fromOpenId");
       console.log("openId="+self.openId);
       console.log("fromOpenId="+self.fromOpenId);
-      this.recordVisit();
+      //this.recordVisit();
 
       self.$api.get("/api/weixin/sign?url=" + encodeURIComponent(location.href.split('#')[0]), p,
         r => {
@@ -53,7 +53,7 @@
             let shareData = {
               title: '安吉信息安全冲顶大会', // 分享标题
               desc: '每天10题，赢8000元大奖，关注公众号还有丰厚礼品等你拿！', // 分享描述
-              link: 'http://srcwap.anji-plus.com/index.html#/share?fromOpenId='+self.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              link: 'http://srcwap.anji-plus.com/share/uv?fromOpenId='+self.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               imgUrl: 'http://srcwap.anji-plus.com/share-tip.png', // 分享图标
               success:function () {
 
