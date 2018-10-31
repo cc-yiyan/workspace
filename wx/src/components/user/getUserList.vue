@@ -30,7 +30,7 @@
         绑定状态:{{state}}
       </div>
     </div>
-    <!-- <div class="bottom" @click="close">返回</div> -->
+    <div class="bottom" @click="close">分享赢好礼</div>
 
   </div>
 </template>
@@ -79,7 +79,7 @@ export default {
       };
       let userId = getQueryString("userId");
       self.$api.post(
-        "register/queryUserInfo?userId="+userId,
+        "register/queryUserInfo?userId=" + userId,
         {},
         r => {
           console.log(r, 111);
@@ -128,7 +128,7 @@ export default {
       // WeixinJSBridge.call("closeWindow");
       // this.$route.go(-1);
       self.$router.push({
-        path: "/"
+        path: "/share"
       });
     }
   }
@@ -160,7 +160,8 @@ export default {
   border-radius: 0.5em;
   text-align: center;
   color: #fff;
-  background: #ccc;
+  /* background: #ccc; */
+  background: #da3f51;
 }
 
 .middle {
