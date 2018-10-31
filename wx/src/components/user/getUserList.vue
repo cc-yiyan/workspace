@@ -40,8 +40,8 @@ export default {
   data() {
     return {
       item: {
-        // nickName: "", //姓名
-        // openid: "", //绑定号
+        userId: "", //姓名
+        openId: "", //绑定号
         // company: "", //公司
         // department: "", //bumen
         // mailbox: "", //邮箱
@@ -78,6 +78,9 @@ export default {
         return returnValue;
       };
       let userId = getQueryString("userId");
+      self.userId = userId;
+      self.openId = getQueryString("openId");
+
       self.$api.post(
         "register/queryUserInfo?userId=" + userId,
         {},
@@ -128,7 +131,7 @@ export default {
       // WeixinJSBridge.call("closeWindow");
       // this.$route.go(-1);
       self.$router.push({
-        path: "/share"
+        path: "/share?openId="+self.openId+"&userId="+self.userId
       });
     }
   }
