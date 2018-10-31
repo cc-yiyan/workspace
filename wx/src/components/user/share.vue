@@ -43,6 +43,8 @@
             jsApiList: [
               'onMenuShareAppMessage', //1.0 分享到朋友
               'onMenuShareTimeline', //1.0分享到朋友圈
+              'onMenuShareQQ',
+              'onMenuShareQZone',
               'updateAppMessageShareData', //1.4 分享到朋友
               'updateTimelineShareData', //1.4分享到朋友圈
             ]
@@ -53,13 +55,19 @@
               desc: '每天10题，赢8000元大奖，关注公众号还有丰厚礼品等你拿！', // 分享描述
               link: 'http://srcwap.anji-plus.com/index.html#/share?fromOpenId='+self.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               imgUrl: 'http://srcwap.anji-plus.com/share-tip.png', // 分享图标
-            }
+              success:function () {
+
+              },cancel:function () {
+
+              }
+            };
             /*wx.updateAppMessageShareData(shareData, function (res) {
               //这里是回调函数
             });*/
             if(wx.onMenuShareAppMessage){ //微信文档中提到这两个接口即将弃用，故判断
               wx.onMenuShareAppMessage(shareData);//1.0 分享到朋友
               wx.onMenuShareTimeline(shareData);//1.0分享到朋友圈
+              wx.onMenuShareQQ(shareData);
             }else if(wx.updateAppMessageShareData){
               wx.updateAppMessageShareData(shareData);//1.4 分享到朋友
               wx.updateTimelineShareData(shareData);//1.4分享到朋友圈
