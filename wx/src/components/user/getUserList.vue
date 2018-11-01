@@ -2,7 +2,7 @@
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}" >
     <div class="head">
       <img :src="item.headimgurl" class="user-img">
-        <div style="color:#ccc">{{item.nickName}}</div>
+        <div style="color:#ccc">{{item.loginName}}</div>
     </div>
     <div class="middle" >
        <div class="input-bar">
