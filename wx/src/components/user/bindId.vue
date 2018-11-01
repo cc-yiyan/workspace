@@ -115,7 +115,10 @@ export default {
         : (this.state = false);
     },
     getCode() {
+      //test
       var self = this;
+      self.openId = getQueryString("openId");
+
       // if (this.loginName == "") {
       //   this.$message({
       //     message: "请输入姓名",
@@ -166,9 +169,10 @@ export default {
             clearInterval(stem);
           }
         }, 1000);
+        // self.openId = getQueryString("openId");
         var p = {
-          phone: self.telephone,
-          openid: self.openId //新增加openId请求参数
+          phone: self.telephone
+          // openId: self.openId //新增加openId请求参数
         };
         self.$api.post(
           "register/sendCodeSMS",
