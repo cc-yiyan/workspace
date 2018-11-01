@@ -84,7 +84,7 @@ export default {
     };
     //var code = getQueryString('code');
     self.openId = getQueryString("openId");
-    console.log("openid=" + self.openId);
+    // console.log("openid=" + self.openId);
     console.log(window.location.href);
     /*console.log("code:"+code);
       if(code) {
@@ -116,6 +116,27 @@ export default {
     },
     getCode() {
       var self = this;
+      if (this.loginName == "") {
+        this.$message({
+          message: "请输入姓名",
+          type: "warning"
+        });
+        return;
+      }
+      if (this.company == "") {
+        this.$message({
+          message: "请输入公司",
+          type: "warning"
+        });
+        return;
+      }
+      if (this.mailbox == "") {
+        this.$message({
+          message: "请输入公司邮箱",
+          type: "warning"
+        });
+        return;
+      }
       if (!self.flag) {
         return;
       }
@@ -146,7 +167,8 @@ export default {
           }
         }, 1000);
         var p = {
-          phone: self.telephone
+          phone: self.telephone,
+          openId: self.openId //新增加openId请求参数
         };
         self.$api.post(
           "register/sendCodeSMS",
@@ -157,6 +179,11 @@ export default {
             self.smsId = r.data.msg_id;
           },
           e => {
+            //手机号已经绑定，错误提示信息
+            this.$message({
+              message: "您的手机号已经绑定",
+              type: "warning"
+            });
             console.log(e);
             // alert(11);
           }
@@ -218,7 +245,9 @@ export default {
         department: this.department,
         mailbox: this.mailbox,
         phone: this.telephone,
-        openid: this.openId,
+        // openid: this.openId,
+        //openid修改
+        openId: this.openId,
         fromOpenid: ""
       };
       self.$api.post(
@@ -257,7 +286,7 @@ export default {
 .login-bg {
   width: 100%;
   height: 100%;
-  background: url("../../assets/img/login_bg.png") no-repeat center;
+  background: url("../../assets/img/bg.png") no-repeat center;
   background-size: cover;
   position: relative;
 }
