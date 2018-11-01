@@ -27,7 +27,7 @@
         积分:{{item.score}}
       </div>
       <div class="input-bar">
-        绑定状态:{{state}}
+        审核状态:{{auditState}}
       </div>
     </div>
     <div class="bottom" @click="close">分享赢好礼</div>
@@ -41,7 +41,7 @@ export default {
     return {
       item: {
         userId: "", //姓名
-        openId: "", //绑定号
+        openId: "" //绑定号
         // company: "", //公司
         // department: "", //bumen
         // mailbox: "", //邮箱
@@ -103,12 +103,12 @@ export default {
           // if (r.repData.imgUrl != "") {
           //   self.contact.httpPicture = r.repData.imgUrl.split(",");
           // }
-          if (r.data.state == 3) {
-            self.state = "已绑定";
-          } else if (r.data.state == 2) {
-            self.state = "审核中";
+          if (r.data.auditState == 3) {
+            self.auditState = "已绑定";
+          } else if (r.data.auditState == 2) {
+            self.auditState = "审核中";
           } else {
-            self.state = "未绑定";
+            self.auditState = "未绑定";
           }
         },
         e => {
@@ -131,7 +131,7 @@ export default {
       // WeixinJSBridge.call("closeWindow");
       // this.$route.go(-1);
       self.$router.push({
-        path: "/share?openId="+self.openId+"&userId="+self.userId
+        path: "/share?openId=" + self.openId + "&userId=" + self.userId
       });
     }
   }
@@ -172,6 +172,8 @@ export default {
   height: auto;
   background: #fff;
   margin: 0em auto 0.5rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
   position: relative;
   border-radius: 0.45em;
   -webkit-border-radius: 0.45em;
@@ -182,6 +184,8 @@ export default {
   font-size: 0.28rem;
   /* height: 1.9em; */
   color: #999;
+  border-bottom: 0.5px #ccc solid;
+
   padding: 0.8em 0rem;
   line-height: 1.9em;
   padding-left: 1em;
