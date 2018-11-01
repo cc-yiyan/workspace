@@ -116,27 +116,27 @@ export default {
     },
     getCode() {
       var self = this;
-      if (this.loginName == "") {
-        this.$message({
-          message: "请输入姓名",
-          type: "warning"
-        });
-        return;
-      }
-      if (this.company == "") {
-        this.$message({
-          message: "请输入公司",
-          type: "warning"
-        });
-        return;
-      }
-      if (this.mailbox == "") {
-        this.$message({
-          message: "请输入公司邮箱",
-          type: "warning"
-        });
-        return;
-      }
+      // if (this.loginName == "") {
+      //   this.$message({
+      //     message: "请输入姓名",
+      //     type: "warning"
+      //   });
+      //   return;
+      // }
+      // if (this.company == "") {
+      //   this.$message({
+      //     message: "请输入公司",
+      //     type: "warning"
+      //   });
+      //   return;
+      // }
+      // if (this.mailbox == "") {
+      //   this.$message({
+      //     message: "请输入公司邮箱",
+      //     type: "warning"
+      //   });
+      //   return;
+      // }
       if (!self.flag) {
         return;
       }
@@ -168,7 +168,7 @@ export default {
         }, 1000);
         var p = {
           phone: self.telephone,
-          openId: self.openId //新增加openId请求参数
+          openid: self.openId //新增加openId请求参数
         };
         self.$api.post(
           "register/sendCodeSMS",
@@ -180,10 +180,10 @@ export default {
           },
           e => {
             //手机号已经绑定，错误提示信息
-            this.$message({
-              message: "您的手机号已经绑定",
-              type: "warning"
-            });
+            // this.$message({
+            //   message: "您的手机号已经绑定",
+            //   type: "warning"
+            // });
             console.log(e);
             // alert(11);
           }
@@ -245,9 +245,9 @@ export default {
         department: this.department,
         mailbox: this.mailbox,
         phone: this.telephone,
-        // openid: this.openId,
+        openid: this.openId,
         //openid修改
-        openId: this.openId,
+        // openId: this.openId,
         fromOpenid: ""
       };
       self.$api.post(
