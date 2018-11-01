@@ -128,18 +128,18 @@ export default {
 .img-bg {
   width: 7.5rem;
   height: 14rem;
-  background: url("./../../assets/img/imgBgShare.jpg") no-repeat;
+  background: url("./../../assets/img/imgBgShare.png") no-repeat;
   background-size: 100%;
   position: relative;
 }
 .er-img {
   position: absolute;
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 3.5rem;
+  height: 3.5rem;
   background-color: #000;
-  bottom: -2rem;
+  bottom: 4.3rem;
   /* right: 0.2rem; */
-  left: 40%;
+  left: 26%;
   background-image: url("./../../assets/img/er.jpg");
   background-size: 100%;
 }
