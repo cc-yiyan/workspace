@@ -6,7 +6,11 @@
         <div class="user-img">
 
           <input type="file" accept="image/jpeg,image/jpg,image/x-png,image/x-gif,image/webp" @change="getFile($event)" class="file-input" value="">
-          <div class="u-btn">点击上传图片</div>
+          <div class="u-btn">
+            <span style=" font-size: 0.4rem;font-weight: bold;">点击此处上传工牌照片</span></br></br>
+            <span style="color:#ff4d51;font-size:0.1rem;">(请勿遮挡工牌中公司名称和姓名,</br>如无工牌请上传带有本人公司邮箱地址的邮箱账户图片)</span>
+          
+          </div>
           <img :src="sortUrl" id="img0" width="120" class="bobo">
           <!-- <button @click="submitForm($event)">提交</button> -->
 
@@ -38,7 +42,7 @@ export default {
     return {
       file: "",
       sortUrl: "",
-      imgDisplay: false,
+      imgDisplay: false
     };
   },
   mounted() {
@@ -95,7 +99,7 @@ export default {
         p,
         r => {
           self.$router.push({
-            path: "/getUserList?userId="+userId
+            path: "/getUserList?userId=" + userId
           });
         },
         e => {
@@ -192,7 +196,8 @@ export default {
   visibility: visible;
 }
 .u-btn {
-  color: #ccc;
+  /* color: #ccc; */
+
   margin-bottom: 0.9rem;
 }
 .bobo {
