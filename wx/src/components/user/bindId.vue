@@ -1,19 +1,23 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}">
-    <div class="login-logo"><span style="color:#fff">绑定身份信息</span></div>
+    <div class="login-logo"><span style="color:#fff">绑定身份信息</span></br></br>
+    <span style="color:#ff4d51;font-size:0.1rem;">（本活动仅限安吉物流员工参与）</span>
+    </div>
+    <!-- <div><span style="color:#ff4d51;font-size:0.1rem;">（本活动仅限安吉物流员工参与）</span></div> -->
     <div class="input-box">
       <div class="input-bar">
         <!-- <input placeholder="姓名" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11"/> -->
         <input placeholder="请输入姓名" v-model="loginName" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入公司" v-model="company" class="inputt"/>
+        <input placeholder="请输入安吉物流子公司名称" v-model="company" class="inputt"/>
       </div>
-      <div class="input-bar">
+      <!-- 部门依照需求方的去除 -->
+      <!-- <div class="input-bar">
         <input placeholder="请输入部门" v-model="department" class="inputt"/>
-      </div>
+      </div> -->
       <div class="input-bar">
-        <input placeholder="请输入邮箱" v-model="mailbox" class="inputt"/>
+        <input placeholder="请输入公司邮箱" v-model="mailbox" class="inputt"/>
       </div>
       <div class="input-bar">
         <input placeholder="请输入手机号" v-model.trim="telephone" @keyup="Keyup" type="tel" maxlength="11" class="inputt"/>
@@ -154,6 +158,7 @@ export default {
           },
           e => {
             console.log(e);
+            // alert(11);
           }
         );
       }
@@ -220,7 +225,7 @@ export default {
         "register/saveUserInfo",
         p,
         s => {
-          console.log("uid="+s.data.id);
+          console.log("uid=" + s.data.id);
           self.userphoto(s.data.id);
         },
         e => {
@@ -236,7 +241,7 @@ export default {
     userphoto(id) {
       const self = this;
       this.$router.push({
-        path: /*self.$api.rooturl + */ "/upPhoto?userId="+id,
+        path: /*self.$api.rooturl + */ "/upPhoto?userId=" + id,
         query: {
           userId: id,
           company: this.company,
