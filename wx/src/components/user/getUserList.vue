@@ -103,12 +103,12 @@ export default {
           // if (r.repData.imgUrl != "") {
           //   self.contact.httpPicture = r.repData.imgUrl.split(",");
           // }
-          if (r.data.auditState == 3) {
-            self.auditState = "已绑定";
-          } else if (r.data.auditState == 2) {
-            self.auditState = "审核中";
+          if (r.data.auditState == 1) {
+            self.auditState = "已审核";
+          } else if (r.data.auditState == 0) {
+            self.auditState = "未审核";
           } else {
-            self.auditState = "未绑定";
+            self.auditState = "不明";
           }
         },
         e => {
