@@ -117,22 +117,35 @@ export default {
     getCode() {
       //test
       var self = this;
+      if (this.loginName == "") {
+        self.$vux.toast.show({
+          text: "请输入姓名!",
+          time: "2000",
+          type: "text",
+          position: "middle"
+        });
+        return;
+      }
+      if (this.company == "") {
+        self.$vux.toast.show({
+          text: "请输入公司!",
+          time: "2000",
+          type: "text",
+          position: "middle"
+        });
+        return;
+      }
+      if (this.mailbox == "") {
+        self.$vux.toast.show({
+          text: "请输入公司邮箱!",
+          time: "2000",
+          type: "text",
+          position: "middle"
+        });
+        return;
+      }
       // self.openId = getQueryString("openId");
 
-      // if (this.loginName == "") {
-      //   this.$message({
-      //     message: "请输入姓名",
-      //     type: "warning"
-      //   });
-      //   return;
-      // }
-      // if (this.company == "") {
-      //   this.$message({
-      //     message: "请输入公司",
-      //     type: "warning"
-      //   });
-      //   return;
-      // }
       // if (this.mailbox == "") {
       //   this.$message({
       //     message: "请输入公司邮箱",
