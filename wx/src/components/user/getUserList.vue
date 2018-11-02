@@ -108,7 +108,7 @@ export default {
           } else if (r.data.auditState == 0) {
             self.auditState = "未审核";
           } else {
-            self.auditState = "不明";
+            self.auditState = "未审核";
           }
         },
         e => {
@@ -142,7 +142,7 @@ export default {
 .login-bg {
   width: 100%;
   height: 100%;
-  background: url("../../assets/img/login_bg.png") no-repeat center;
+  background: url("../../assets/img/bg.png") no-repeat center;
   background-size: cover;
   position: relative;
 }
