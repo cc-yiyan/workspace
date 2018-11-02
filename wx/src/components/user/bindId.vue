@@ -116,8 +116,8 @@ export default {
     },
     getCode() {
       //test
-      var self = this;
-      self.openId = getQueryString("openId");
+      // var self = this;
+      // self.openId = getQueryString("openId");
 
       // if (this.loginName == "") {
       //   this.$message({
