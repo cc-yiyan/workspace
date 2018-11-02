@@ -9,7 +9,7 @@
           <div class="u-btn">
             <span style=" font-size: 0.4rem;font-weight: bold;color:#fff;">点击此处上传工牌照片</span></br></br>
             <span style="color:#ff4d51;font-size:0.25rem;">(请勿遮挡工牌中公司名称和姓名,</br>如无工牌请上传带有本人公司邮箱地址的邮箱账户图片)</span>
-          
+
           </div>
           <img :src="sortUrl" id="img0" width="120" class="bobo">
           <!-- <button @click="submitForm($event)">提交</button> -->
@@ -42,14 +42,32 @@ export default {
     return {
       file: "",
       sortUrl: "",
-      imgDisplay: false
+      imgDisplay: false,
+      openId:""
     };
   },
   mounted() {
     let self = this;
     this.viewH = window.innerHeight;
+    self.openId = self.getQueryString("openId");
   },
   methods: {
+    getQueryString(paras) {
+      var url = window.location.href;
+      var index = url.indexOf("?");
+      var str = url.substr(index + 1);
+      var arr = str.split("&");
+      var obj = {};
+      for (var i = 0; i < arr.length; i++) {
+        var num = arr[i].indexOf("=");
+        if (num > 0) {
+          obj[arr[i].substring(0, num)] = arr[i].substr(num + 1);
+        }
+      }
+      console.log(obj);
+      var returnValue = obj[paras];
+      return returnValue;
+    },
     getObjectURL(file) {
       var url = null;
       if (window.createObjectURL != undefined) {
@@ -72,23 +90,8 @@ export default {
     submitForm(event) {
       let self = this;
       event.preventDefault();
-      var getQueryString = function(paras) {
-        var url = window.location.href;
-        var index = url.indexOf("?");
-        var str = url.substr(index + 1);
-        var arr = str.split("&");
-        var obj = {};
-        for (var i = 0; i < arr.length; i++) {
-          var num = arr[i].indexOf("=");
-          if (num > 0) {
-            obj[arr[i].substring(0, num)] = arr[i].substr(num + 1);
-          }
-        }
-        console.log(obj);
-        var returnValue = obj[paras];
-        return returnValue;
-      };
-      let userId = getQueryString("userId");
+
+      let userId = self.getQueryString("userId");
       let formData = new FormData();
       formData.append("file", self.file);
       formData.append("userId", userId);
@@ -99,7 +102,7 @@ export default {
         p,
         r => {
           self.$router.push({
-            path: "/getUserList?userId=" + userId
+            path: "/getUserList?userId=" + userId+"&openId="+self.openId
           });
         },
         e => {

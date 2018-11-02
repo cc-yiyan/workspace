@@ -295,7 +295,7 @@ export default {
     userphoto(id) {
       const self = this;
       this.$router.push({
-        path: /*self.$api.rooturl + */ "/upPhoto?userId=" + id,
+        path: /*self.$api.rooturl + */ "/upPhoto?userId=" + id+"&openId="+self.openId,
         query: {
           userId: id,
           company: this.company,
