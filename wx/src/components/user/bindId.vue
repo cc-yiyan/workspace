@@ -184,8 +184,8 @@ export default {
         }, 1000);
         // self.openId = getQueryString("openId");
         var p = {
-          phone: self.telephone
-          // openId: self.openId //新增加openId请求参数
+          phone: self.telephone,
+          openId: self.openId //新增加openId请求参数
         };
         self.$api.post(
           "register/sendCodeSMS",
@@ -201,6 +201,12 @@ export default {
             //   message: "您的手机号已经绑定",
             //   type: "warning"
             // });
+            self.$vux.toast.show({
+              text: "您的手机号已绑定!",
+              time: "2000",
+              type: "text",
+              position: "middle"
+            });
             console.log(e);
             // alert(11);
           }
