@@ -1,14 +1,14 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}" >
     <!-- <div class="info-header"> -->
-      <div class="info-bg"><img src="../../assets/img/login_bg.png" /></div>
+      <div class="info-bg"><img src="../../assets/img/bg.png" /></div>
       <div class="info-user">
         <div class="user-img">
 
           <input type="file" accept="image/jpeg,image/jpg,image/x-png,image/x-gif,image/webp" @change="getFile($event)" class="file-input" value="">
           <div class="u-btn">
-            <span style=" font-size: 0.4rem;font-weight: bold;">点击此处上传工牌照片</span></br></br>
-            <span style="color:#ff4d51;font-size:0.1rem;">(请勿遮挡工牌中公司名称和姓名,</br>如无工牌请上传带有本人公司邮箱地址的邮箱账户图片)</span>
+            <span style=" font-size: 0.4rem;font-weight: bold;color:#fff;">点击此处上传工牌照片</span></br></br>
+            <span style="color:#ff4d51;font-size:0.25rem;">(请勿遮挡工牌中公司名称和姓名,</br>如无工牌请上传带有本人公司邮箱地址的邮箱账户图片)</span>
           
           </div>
           <img :src="sortUrl" id="img0" width="120" class="bobo">
@@ -116,7 +116,7 @@ export default {
 .login-bg {
   width: 100%;
   height: 100%;
-  background: url("../../assets/img/login_bg.png") no-repeat center;
+  background: url("../../assets/img/bg.png") no-repeat center;
   background-size: cover;
   position: relative;
 }
