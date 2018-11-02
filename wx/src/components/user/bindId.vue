@@ -1,7 +1,8 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}">
+    <div class="anji"><img src="../../assets/img/logo.png" alt=""></div>
     <div class="login-logo"><span style="color:#fff">绑定身份信息</span></br></br>
-    <span style="color:#ff4d51;font-size:0.1rem;">（本活动仅限安吉物流员工参与）</span>
+    <span style="color:#ff4d51;font-size:0.25rem;">（本活动仅限安吉物流员工参与）</span>
     </div>
     <!-- <div><span style="color:#ff4d51;font-size:0.1rem;">（本活动仅限安吉物流员工参与）</span></div> -->
     <div class="input-box">
@@ -28,6 +29,7 @@
       </div>
     </div>
     <div :class="[state?'code-bg':'']" class="login-button" @click="codeCheck">下一步</div>
+    <div class="bott"><span>本活动由安吉物流工会主办，安吉加加信息安全部承办</span></div>
   </div>
 </template>
 <script>
@@ -313,10 +315,13 @@ export default {
   background-size: cover;
   position: relative;
 }
-
+.anji {
+  position: absolute;
+  margin: 0.6rem 0 0 0.2rem;
+}
 .login-logo {
   text-align: center;
-  margin: 0 auto;
+  margin: 0px auto;
   padding-top: 2rem;
   padding-bottom: 1rem;
 }
@@ -325,7 +330,7 @@ export default {
   width: 70%;
   height: auto;
   background: #fff;
-  margin: 1em auto 1rem;
+  margin: 0.2em auto 1rem;
   position: relative;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
@@ -385,7 +390,13 @@ export default {
   color: #fff;
   background: #ccc;
 }
-
+.bott {
+  color: #fff;
+  font-size: 0.25rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  /* margin: 0 0 0 0; */
+}
 .code-bg {
   background: #ff4d51;
 }
