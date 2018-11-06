@@ -137,7 +137,7 @@ export default {
   width: 6rem;
   height: 6rem;
   background-color: #000;
-  bottom: -4.3rem;
+  bottom: -6rem;
   /* right: 0.2rem; */
   left: 15%;
   background-image: url("./../../assets/img/er.jpg");
