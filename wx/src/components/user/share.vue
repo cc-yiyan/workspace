@@ -134,12 +134,12 @@ export default {
 }
 .er-img {
   position: absolute;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 6rem;
+  height: 6rem;
   background-color: #000;
-  bottom: 4.3rem;
+  bottom: -4.3rem;
   /* right: 0.2rem; */
-  left: 26%;
+  left: 15%;
   background-image: url("./../../assets/img/er.jpg");
   background-size: 100%;
 }
