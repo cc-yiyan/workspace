@@ -1,6 +1,7 @@
 <template>
     <div class="img-bg">
-        <div class="er-img"></div>
+        <!-- <div class="er-img"></div> -->
+          <img src="./../../assets/img/er.jpg" alt="" class="er-img">
     </div>
 </template>
 
@@ -134,13 +135,13 @@ export default {
 }
 .er-img {
   position: absolute;
-  width: 6rem;
-  height: 6rem;
+  width: 3.6rem;
+  height: 3.6rem;
   background-color: #000;
-  bottom: -6rem;
+  bottom: 4.2rem;
   /* right: 0.2rem; */
-  left: 15%;
-  background-image: url("./../../assets/img/er.jpg");
+  left: 26%;
+  /* background-image: url("./../../assets/img/er.jpg"); */
   background-size: 100%;
 }
 </style>
