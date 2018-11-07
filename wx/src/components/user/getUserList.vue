@@ -82,7 +82,7 @@ export default {
       self.openId = getQueryString("openId");
 
       self.$api.post(
-        "register/queryUserInfo?userId=" + userId,
+        "register/queryUserInfo?userId=" + self.openId,
         {},
         r => {
           console.log(r, 111);
