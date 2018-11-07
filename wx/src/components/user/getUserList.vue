@@ -11,9 +11,9 @@
        <div class="input-bar">
         公司:{{item.company}}
       </div>
-       <div class="input-bar">
+       <!-- <div class="input-bar">
         部门:{{item.department}}
-      </div>
+      </div> -->
       <div class="input-bar">
         邮箱:{{item.mailbox}}
       </div>
