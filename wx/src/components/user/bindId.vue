@@ -128,9 +128,13 @@ export default {
         });
         return;
       }
-      if (this.company == "") {
+      if (
+        this.company == "" ||
+        this.company == "安吉" ||
+        this.company == "安吉物流"
+      ) {
         self.$vux.toast.show({
-          text: "请输入公司!",
+          text: "请输入子公司名称!",
           time: "2000",
           type: "text",
           position: "middle"
@@ -145,6 +149,29 @@ export default {
           position: "middle"
         });
         return;
+      }
+      // 不能输入qq邮箱等
+      var mailboxReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+      if (mailboxReg.test(self.mailbox)) {
+        //如果是正确的格式，再进行类型的识别
+        if (
+          this.mailbox.indexOf("qq.com") != -1 ||
+          this.mailbox.indexOf("163.com") != -1 ||
+          this.mailbox.indexOf("sina.com") != -1 ||
+          this.mailbox.indexOf("126.com") != -1 ||
+          this.mailbox.indexOf("gmail.com") != -1 ||
+          this.mailbox.indexOf("139.com") != -1 ||
+          this.mailbox.indexOf("dingtalk.com") != -1
+        ) {
+          //如果值中含有qq则为qq邮箱
+          self.$vux.toast.show({
+            text: "请输入公司邮箱!",
+            time: "2000",
+            type: "text",
+            position: "middle"
+          });
+          return;
+        }
       }
       // self.openId = getQueryString("openId");
 
@@ -295,7 +322,11 @@ export default {
     userphoto(id) {
       const self = this;
       this.$router.push({
-        path: /*self.$api.rooturl + */ "/upPhoto?userId=" + id+"&openId="+self.openId,
+        path:
+          /*self.$api.rooturl + */ "/upPhoto?userId=" +
+          id +
+          "&openId=" +
+          self.openId,
         query: {
           userId: id,
           company: this.company,
