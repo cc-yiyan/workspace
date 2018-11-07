@@ -107,8 +107,8 @@ export default {
             self.auditState = "已审核";
           } else if (r.data.auditState == 0) {
             self.auditState = "未审核";
-          } else {
-            self.auditState = "未审核";
+          } else if (r.data.auditState == 2) {
+            self.auditState = "审核未通过";
           }
         },
         e => {
