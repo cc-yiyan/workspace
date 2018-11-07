@@ -7,7 +7,7 @@
 
           <input type="file" accept="image/jpeg,image/jpg,image/x-png,image/x-gif,image/webp" @change="getFile($event)" class="file-input" value="">
           <div class="u-btn">
-            <span style=" font-size: 0.4rem;font-weight: bold;color:#fff;">点击此处上传工牌照片</span></br></br>
+            <button style=" font-size: 0.4rem;color:#fff;border-radius: 0.5em;background: #da3f51;height: 2em;">点击此处上传工牌照片</button></br></br>
             <span style="color:#ff4d51;font-size:0.25rem;">(请勿遮挡工牌中公司名称和姓名,</br>如无工牌请上传带有本人公司邮箱地址的邮箱账户图片)</span>
 
           </div>
@@ -43,7 +43,7 @@ export default {
       file: "",
       sortUrl: "",
       imgDisplay: false,
-      openId:""
+      openId: ""
     };
   },
   mounted() {
@@ -102,7 +102,7 @@ export default {
         p,
         r => {
           self.$router.push({
-            path: "/getUserList?userId=" + userId+"&openId="+self.openId
+            path: "/getUserList?userId=" + userId + "&openId=" + self.openId
           });
         },
         e => {
