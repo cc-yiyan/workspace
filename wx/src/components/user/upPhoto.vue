@@ -94,7 +94,7 @@ export default {
       let userId = self.getQueryString("userId");
       let formData = new FormData();
       formData.append("file", self.file);
-      formData.append("userId", userId);
+      formData.append("userId", self.openId);
       let p = formData;
 
       self.$api.postFile(
