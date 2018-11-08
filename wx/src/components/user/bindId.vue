@@ -172,6 +172,14 @@ export default {
           });
           return;
         }
+      }else {
+         self.$vux.toast.show({
+            text: "请输入公司邮箱!",
+            time: "2000",
+            type: "text",
+            position: "middle"
+          });
+          return;
       }
       // self.openId = getQueryString("openId");
 
