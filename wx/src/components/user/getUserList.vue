@@ -107,10 +107,13 @@ export default {
           // }
           if (r.data.auditState == 1) {
             self.auditState = "已审核";
-          } else if (r.data.auditState == 0) {
-            self.auditState = "未审核";
           } else if (r.data.auditState == 2) {
+            //  else if (r.data.auditState == 0) {
+            //   self.auditState = "未审核";
+            // }
             self.auditState = "审核未通过";
+          } else {
+            self.auditState = "未审核";
           }
         },
         e => {
