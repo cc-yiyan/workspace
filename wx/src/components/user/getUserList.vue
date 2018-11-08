@@ -1,5 +1,7 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}" >
+    <div class="anji"><img src="../../assets/img/logo.png" alt=""></div>
+    
     <div class="head">
       <img :src="item.headimgurl" class="user-img">
         <div style="color:#ccc">{{item.loginName}}</div>
@@ -139,6 +141,10 @@ export default {
 </script>
 
 <style scoped>
+.anji {
+  position: absolute;
+  margin: 0.6rem 0 0 0.2rem;
+}
 .login-bg {
   width: 100%;
   height: 100%;
@@ -205,5 +211,6 @@ export default {
   border-radius: 100%;
   overflow: hidden;
   margin: 0 auto;
+  margin-top: 0.7rem;
 }
 </style>
