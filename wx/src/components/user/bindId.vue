@@ -261,7 +261,9 @@ export default {
       const self = this;
       var p = {
         smsId: self.smsId,
-        smsCode: self.codes
+        smsCode: self.codes,
+        phone: self.telephone,
+        openId: self.openId
       };
       self.$api.post(
         "register/codeSMSValid",
