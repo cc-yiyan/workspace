@@ -238,6 +238,7 @@ export default {
             });
             console.log(e);
             // alert(11);
+            self.smsId = "0";
           }
         );
       }
@@ -302,7 +303,8 @@ export default {
         openid: this.openId,
         //openid修改
         // openId: this.openId,
-        fromOpenid: ""
+        fromOpenid: "",
+        createBy:this.smsId
       };
       self.$api.post(
         "register/saveUserInfo",
