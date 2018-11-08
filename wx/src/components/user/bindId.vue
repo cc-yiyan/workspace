@@ -172,14 +172,14 @@ export default {
           });
           return;
         }
-      }else {
-         self.$vux.toast.show({
-            text: "请输入公司邮箱!",
-            time: "2000",
-            type: "text",
-            position: "middle"
-          });
-          return;
+      } else {
+        self.$vux.toast.show({
+          text: "请输入公司邮箱!",
+          time: "2000",
+          type: "text",
+          position: "middle"
+        });
+        return;
       }
       // self.openId = getQueryString("openId");
 
@@ -284,16 +284,20 @@ export default {
           if (success.data.is_valid) {
             self.saveUserInfo();
           } else {
-            this.$message({
-              message: "验证码输入错误！",
-              type: "error"
+            self.$vux.toast.show({
+              text: "验证码输入错误!",
+              time: "2000",
+              type: "text",
+              position: "middle"
             });
           }
         },
         e => {
-          this.$message({
-            message: e.repData.repMsg,
-            type: "error"
+          self.$vux.toast.show({
+            text: "您的手机号已绑定!",
+            time: "2000",
+            type: "text",
+            position: "middle"
           });
         }
       );
@@ -312,7 +316,7 @@ export default {
         //openid修改
         // openId: this.openId,
         fromOpenid: "",
-        createBy:this.smsId
+        createBy: this.smsId
       };
       self.$api.post(
         "register/saveUserInfo",
