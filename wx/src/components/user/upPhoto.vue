@@ -1,6 +1,8 @@
 <template>
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}" >
     <!-- <div class="info-header"> -->
+    <div class="anji"><img src="../../assets/img/logo.png" alt=""></div>
+      
       <div class="info-bg"><img src="../../assets/img/bg.png" /></div>
       <div class="info-user">
         <div class="user-img">
@@ -116,6 +118,10 @@ export default {
 };
 </script>
 <style scoped>
+.anji {
+  position: absolute;
+  margin: 0.6rem 0 0 0.2rem;
+}
 .login-bg {
   width: 100%;
   height: 100%;
@@ -136,7 +142,7 @@ export default {
 .info-user {
   width: 100%;
   position: absolute;
-  top: 2.5em;
+  top: 4em;
 }
 
 .user-img {
