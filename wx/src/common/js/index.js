@@ -249,7 +249,7 @@ export default {
       })
       .catch(function(err) {
         console.log(err);
-        window.alert("服务器异常");
+        // window.alert("服务器异常");
       });
   }
 };
