@@ -22,8 +22,8 @@ export default {
   post: function(url, params, success, failure) {
     return this.apiAxios("POST", url, params, success, failure);
   },
-  postFile: function(url, params, success, failure,header) {
-    return this.apiAxios("POST", url, params, success, failure,header);
+  postFile: function(url, params, success, failure, header) {
+    return this.apiAxios("POST", url, params, success, failure, header);
   },
   put: function(url, params, success, failure) {
     return this.apiAxios("PUT", url, params, success, failure);
@@ -175,22 +175,24 @@ export default {
     主要是，不同的接口的成功标识和失败提示是不一致的。
     另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
   */
-  apiAxios(method, url, params, success, failure,header) {
+  apiAxios(method, url, params, success, failure, header) {
     let self = this;
     if (params) {
-
       //params = self.sign(params);
     }
-    let fileHeader=""
-    if(header){
-      fileHeader="file"
+    let fileHeader = "";
+    if (header) {
+      fileHeader = "file";
     }
 
-    let headerStr=""
-    headerStr=(fileHeader=="")?"application/json;charset=UTF-8":"multipart/form-data";
+    let headerStr = "";
+    headerStr =
+      fileHeader == ""
+        ? "application/json;charset=UTF-8"
+        : "multipart/form-data";
     let head = {};
-    if(fileHeader=="file"){
-      head = {'Content-Type':"multipart/form-data"}
+    if (fileHeader == "file") {
+      head = { "Content-Type": "multipart/form-data" };
     }
     axios({
       method: method,
@@ -248,8 +250,11 @@ export default {
         // }
       })
       .catch(function(err) {
-        console.log(err);
+        // console.log(err);
         // window.alert("服务器异常");
+        // console.log(err);
+        // window.alert("服务器异常");
+        window.alert(JSON.stringify(err.message));
       });
   }
 };
