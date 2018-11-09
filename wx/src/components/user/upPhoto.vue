@@ -33,6 +33,9 @@
 import Vue from "vue";
 import { WechatPlugin } from "vux";
 Vue.use(WechatPlugin); //使用微信插件
+import { LoadingPlugin } from "vux";
+Vue.use(LoadingPlugin);
+
 let rootUrl = sessionStorage.getItem("rooturl");
 import { PopupRadio } from "vux";
 export default {
@@ -98,11 +101,15 @@ export default {
       formData.append("file", self.file);
       formData.append("userId", self.openId);
       let p = formData;
+      self.$vux.loading.show({
+        text: "Loading"
+      });
 
       self.$api.postFile(
         "/register/uploadimage",
         p,
         r => {
+          self.$vux.loading.hide()
           self.$router.push({
             path: "/getUserList?userId=" + userId + "&openId=" + self.openId
           });
