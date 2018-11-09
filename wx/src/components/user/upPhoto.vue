@@ -109,13 +109,17 @@ export default {
         "/register/uploadimage",
         p,
         r => {
-          self.$vux.loading.hide()
+          self.$vux.loading.hide();
           self.$router.push({
             path: "/getUserList?userId=" + userId + "&openId=" + self.openId
           });
+          setTimeout(() => {
+            alert(JSON.stringify(r));
+          }, 2000);
         },
         e => {
-          console.log(e.msg);
+          self.$vux.loading.hide();
+          console.log(e.message);
         },
         "file"
       );
