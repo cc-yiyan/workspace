@@ -254,7 +254,7 @@ export default {
         // window.alert("服务器异常");
         // console.log(err);
         // window.alert("服务器异常");
-        window.alert(JSON.stringify(err.message));
+        // window.alert(JSON.stringify(err.message));
       });
   }
 };
