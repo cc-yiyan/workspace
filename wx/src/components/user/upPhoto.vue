@@ -113,9 +113,9 @@ export default {
           self.$router.push({
             path: "/getUserList?userId=" + userId + "&openId=" + self.openId
           });
-          setTimeout(() => {
-            alert(JSON.stringify(r));
-          }, 2000);
+          // setTimeout(() => {
+          //   alert(JSON.stringify(r));
+          // }, 2000);
         },
         e => {
           self.$vux.loading.hide();
