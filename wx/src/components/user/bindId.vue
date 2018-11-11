@@ -246,7 +246,7 @@ export default {
             //   position: "middle"
             // });
             self.$vux.toast.show({
-              text: e.repMsg,
+              text: e.msg,
               time: "2000",
               type: "text",
               position: "middle"
@@ -306,12 +306,12 @@ export default {
           //   type: "text",
           //   position: "middle"
           // });
-          self.$vux.toast.show({
-            text: e.repMsg,
-            time: "2000",
-            type: "text",
-            position: "middle"
-          });
+          // self.$vux.toast.show({
+          //   text: e.msg,
+          //   time: "2000",
+          //   type: "text",
+          //   position: "middle"
+          // });
         }
       );
       //userphoto();
@@ -343,12 +343,12 @@ export default {
           //   message: e.msg,
           //   type: "error"
           // });
-          self.$vux.toast.show({
-            text: e.repMsg,
-            time: "2000",
-            type: "text",
-            position: "middle"
-          });
+          // self.$vux.toast.show({
+          //   text: e.msg,
+          //   time: "2000",
+          //   type: "text",
+          //   position: "middle"
+          // });
         }
       );
     },
