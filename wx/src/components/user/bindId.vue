@@ -222,6 +222,7 @@ export default {
         // self.openId = getQueryString("openId");
         var p = {
           phone: self.telephone,
+          mailbox: self.mailbox, //新增加邮箱验证参数
           openId: self.openId //新增加openId请求参数
         };
         self.$api.post(
@@ -238,8 +239,14 @@ export default {
             //   message: "您的手机号已经绑定",
             //   type: "warning"
             // });
+            // self.$vux.toast.show({
+            //   text: "您的手机号已绑定!",
+            //   time: "2000",
+            //   type: "text",
+            //   position: "middle"
+            // });
             self.$vux.toast.show({
-              text: "您的手机号已绑定!",
+              text: e.repMsg,
               time: "2000",
               type: "text",
               position: "middle"
@@ -293,8 +300,14 @@ export default {
           }
         },
         e => {
+          // self.$vux.toast.show({
+          //   text: "您的手机号已绑定!",
+          //   time: "2000",
+          //   type: "text",
+          //   position: "middle"
+          // });
           self.$vux.toast.show({
-            text: "您的手机号已绑定!",
+            text: e.repMsg,
             time: "2000",
             type: "text",
             position: "middle"
@@ -326,9 +339,15 @@ export default {
           self.userphoto(s.data.id);
         },
         e => {
-          self.$message({
-            message: e.msg,
-            type: "error"
+          // self.$message({
+          //   message: e.msg,
+          //   type: "error"
+          // });
+          self.$vux.toast.show({
+            text: e.repMsg,
+            time: "2000",
+            type: "text",
+            position: "middle"
           });
         }
       );
