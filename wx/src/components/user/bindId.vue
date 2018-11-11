@@ -2,7 +2,7 @@
   <div style="font-size: .32rem" class="login-bg" :style="{height: viewH+'px'}">
     <div class="anji"><img src="../../assets/img/logo.png" alt=""></div>
     <div class="login-logo"><span style="color:#fff">绑定身份信息</span></br></br>
-    <span style="color:#ff4d51;font-size:0.25rem;">（本活动仅限安吉物流员工参与）</span>
+    <span style="color:#ff4d51;font-size:0.25rem;">（本活动仅限上汽安吉物流员工参与）</span>
     </div>
     <!-- <div><span style="color:#ff4d51;font-size:0.1rem;">（本活动仅限安吉物流员工参与）</span></div> -->
     <div class="input-box">
@@ -11,7 +11,7 @@
         <input placeholder="请输入姓名" v-model="loginName" class="inputt"/>
       </div>
       <div class="input-bar">
-        <input placeholder="请输入安吉物流子公司名称" v-model="company" class="inputt"/>
+        <input placeholder="请输入上汽安吉物流子公司名称" v-model="company" class="inputt"/>
       </div>
       <!-- 部门依照需求方的去除 -->
       <!-- <div class="input-bar">
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div :class="[state?'code-bg':'']" class="login-button" @click="codeCheck">下一步</div>
-    <div class="bott"><span>本活动由安吉物流工会主办，安吉加加信息安全部承办</span></div>
+    <div class="bott"><span>本活动由上汽安吉物流工会主办，安吉加加信息安全部承办</span></div>
   </div>
 </template>
 <script>
