@@ -151,7 +151,7 @@ export default {
         return;
       }
       // 不能输入qq邮箱等
-      var mailboxReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+      var mailboxReg = /^[a-zA-Z0-9]+([._\\-]*[a-zA-Z0-9])*@([a-zA-Z0-9]+[-a-z-A-Z0-9]*[a-zA-Z0-9]+.){1,63}[a-zA-Z0-9]+$/;
       if (mailboxReg.test(self.mailbox)) {
         //如果是正确的格式，再进行类型的识别
         if (
