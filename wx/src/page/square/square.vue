@@ -20,8 +20,8 @@
 				:height="viewH"
 			>
 				<ul class="list-box">
-					<li v-for="i in 100">
-						<span @click="detail(i)">{{ " " + i + " " }}</span>
+					<li v-for="i in 100" :key="i" @click="detail(i)">
+						<span>{{ " " + i + " " }}</span>
 					</li>
 				</ul>
 			</scroller>
