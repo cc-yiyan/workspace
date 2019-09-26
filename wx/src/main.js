@@ -8,11 +8,8 @@ import api from './common/js/index'
 Vue.prototype.$api = api
 // 引用路由
 import router from './router/index'
-import { ToastPlugin,ConfirmPlugin,AlertPlugin} from 'vux'
 
-Vue.use(ToastPlugin)
-Vue.use(ConfirmPlugin)
-Vue.use(AlertPlugin)
+
 FastClick.attach(document.body)
 
 // import VueTitle from 'vue-wechat-title'
