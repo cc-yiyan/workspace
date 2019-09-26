@@ -11,7 +11,8 @@ import router from './router/index'
 
 
 FastClick.attach(document.body)
-
+import { LoadingPlugin } from 'vux'
+Vue.use(LoadingPlugin)
 // import VueTitle from 'vue-wechat-title'
 // Vue.use(VueTitle)
 Vue.config.productionTip = false
