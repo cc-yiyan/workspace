@@ -2,10 +2,10 @@
 	<div>
 		<div class="info">
 			个人信息：
-			<p>我收到的：<span class="color" @click="mine(0)">100</span></p>
-			<p>我送出的：<span class="color" @click="mine(1)">100</span></p>
+			<p>我收到的：<span class="color" @click="mine(0)">{{userInfo.receive}}</span></p>
+			<p>我送出的：<span class="color" @click="mine(1)">{{userInfo.send}}</span></p>
 		</div>
-		<tab v-model="type" prevent-default @on-before-index-change="switchTabItem">
+		<tab v-model="type" prevent-default @on-before-index-change="switchTabItem" :custom-bar-width="getBarWidth">
 			<tab-item selected>周榜</tab-item>
 			<tab-item>月榜</tab-item>
 			<tab-item>半年榜</tab-item>
@@ -54,9 +54,20 @@ export default {
 	},
 	data () {
 		return {
-			type: 0,
+      type: 0,
+      userInfo:{
+        icon:"",
+        week:123,
+        month:234,
+        year:2132,
+        receive:23,
+        send:20
+      },
 			viewH: "",
 			pullupDefaultConfig: pullupDefaultConfig,
+      getBarWidth: function (index) {
+        return (index + 1) * 22 + 'px'
+      },
 			listData: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
 		}
 	},
